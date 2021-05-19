@@ -1,0 +1,141 @@
+/* Choose Character */
+
+/* link to page */
+
+.link-to-page {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 20000;
+  cursor: pointer;
+  width: 50px;
+}
+.link-to-page img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* radio button character */
+
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.main-container h2 {
+  margin: 0 0 10px 0;
+  color: var(--rekteria-primary);
+  font-size: 30px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+}
+
+.radio-buttons {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.custom-radio input {
+  display: none;
+}
+
+.radio-btn {
+  margin: 10px;
+  width: 180px;
+  height: 200px;
+  border: 3px solid transparent;
+  display: inline-block;
+  border-radius: 10px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 0 20px #c3c3c367;
+  cursor: pointer;
+}
+
+.radio-btn > i {
+  color: #ffffff;
+  background-color: var(--rekteria-primary);
+  font-size: 20px;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) scale(4);
+  border-radius: 50px;
+  padding: 3px;
+  transition: 0.2s;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.radio-btn .hobbies-icon {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.radio-btn .hobbies-icon i {
+  color: var(--rekteria-primary);
+  line-height: 80px;
+  font-size: 60px;
+}
+
+.radio-btn .hobbies-icon h3 {
+  color: var(--rekteria-primary);
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.custom-radio input:checked + .radio-btn {
+  border: 3px solid var(--rekteria-primary);
+}
+
+.custom-radio input:checked + .radio-btn > i {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+/* change sex radio */
+
+input[name='sex'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: none;
+}
+input[name='sex']:after {
+  font-family: 'FontAwesome';
+  display: inline-block;
+  text-align: center;
+  font-size: 80px;
+  content: attr(data-icon);
+  padding: 20px 20px;
+  border-radius: 15px;
+  color: rgba(0, 0, 0, 0.4);
+  transition: box-shadow 1s, color 1s;
+}
+input[name='sex']:checked:after {
+  box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.4);
+  color: var(--rekteria-primary);
+}
+
+.visible {
+  visibility: visible !important;
+  position: static !important;
+  left: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px !important;
+  height: 150px !important;
+}
