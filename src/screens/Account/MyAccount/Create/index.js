@@ -2,16 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { playerCreate, playerList } from '../../../../actions/PlayerActions';
-
+import { toast, ToastContainer } from 'react-toastify';
 import Container from '../../../Layouts/Container';
 import { createVocations } from '../../../../config';
-import Error from '../../../../helpers/Error';
 import './styles.css';
 
 const CreateCharacter = ({ playerCreate, playerList, player }) => {
   const history = useHistory();
 
-  const [error, setError] = React.useState('');
+  const [, setError] = React.useState('');
   const [name, setName] = React.useState('');
   const [sex, setSex] = React.useState('');
   const [vocation, setVocation] = React.useState('');
@@ -41,8 +40,10 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
 
         if (convertObjToArray === 0) {
           setError(message);
+          toast.error(message);
         } else {
           setError(metadata.error.name);
+          toast.error(metadata.error.name);
         }
       });
   };
@@ -162,6 +163,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
           </div>
         </div>
       </form>
+      <ToastContainer className="toast-message" />
     </Container>
   );
 };

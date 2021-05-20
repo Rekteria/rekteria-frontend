@@ -77,14 +77,14 @@ const AccountWidget = ({ account }) => {
               {loading ? 'Loading... ' : 'Login'}
             </button>
           </Form>
-          <form action="register.php">
+          <Link to="/sign-up">
             <button
               className="btn btn-warning btn-block w-100 mb-2"
               type="submit"
             >
               <i className="fas fa-user-plus" /> Create New Account
             </button>
-          </form>
+          </Link>
 
           <center>
             <a href="recovery.php" id="forgot_pswd">

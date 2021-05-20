@@ -275,7 +275,7 @@ a {
   max-width: 1224px;
 }
 .content-bg {
-  min-height: 1400px;
+  /* min-height: 1400px; */
 
   box-shadow: 0 0 1px #fff inset, 0 0 1px #fff inset, 0 0 1px #fff inset,
     0 0 1px #fff inset;
@@ -393,7 +393,7 @@ a {
     font-size: 3.3rem;
   }
   .content-bg .btn {
-    background-image: url('');
+    /* background-image: url(''); */
     background-position: center 50%;
     background-repeat: repeat-x;
     box-shadow: 0 1px 8px #0007;

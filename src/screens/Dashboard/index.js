@@ -8,7 +8,7 @@ import { getFormData } from '../../helpers/FormData';
 import { newsCreate } from '../../actions/ForumActions';
 
 // import Menu from '../Layouts/Menu';
-import Header from '../Layouts/Header';
+
 import Footer from '../Layouts/Footer';
 
 import './styles.css';
@@ -60,7 +60,7 @@ const Dashboard = ({
         {/* <Menu /> */}
 
         <div className="page-content-wrapper">
-          <Header />
+          {/* <Header /> */}
 
           <main id="js-page-content" role="main" className="page-content">
             <div className="topnav">

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { getAccount } from '../../../helpers/Account';
+
 import useMedia from '../../../Hooks/useMedia';
 
-import Header from '../Header';
 import Navbar from '../Navbar';
 import Topbar from '../Topbar';
 import Footer from '../Footer';
@@ -13,12 +13,11 @@ import ComingEventsWidget from '../Widgets/ComingEventsWidget';
 import BuyCharacterWidget from '../Widgets/BuyCharacterWidget';
 
 const Container = ({ children }) => {
-  const [mobileMenu, setMobileMenu] = React.useState(false);
-  const mobile = useMedia('(max-width: 40rem)');
-
-  const { account } = useSelector((account) => account.account);
-
+  const account = getAccount();
   const { pathname } = useLocation('');
+  const mobile = useMedia('(max-width: 40rem)');
+  const [, setMobileMenu] = React.useState(false);
+
   React.useEffect(() => {
     setMobileMenu(false);
   }, [pathname]);
@@ -40,7 +39,7 @@ const Container = ({ children }) => {
               <div className="col-sm-9 pr-0">{children}</div>
               {/* MAIN CONTENT END */}
               <div className="col-sm-3 hidden-xs">
-                {!mobile && !account && <AccountWidget />}
+                {!account && <AccountWidget />}
                 <ComingEventsWidget />
                 <BuyCharacterWidget />
                 <div className="col-bg">

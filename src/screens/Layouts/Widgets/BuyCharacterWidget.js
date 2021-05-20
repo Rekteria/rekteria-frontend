@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BuyCharacterWidget = () => {
   return (
@@ -10,11 +11,14 @@ const BuyCharacterWidget = () => {
           <tbody>
             <tr>
               <td className="p-0" style={{ width: '24%' }}>
-                <img src="http://outfit-images.ots.me/outfit.php?id=251&addons=3&head=72&body=132&legs=114&feet=132" />
+                <img
+                  src="http://outfit-images.ots.me/outfit.php?id=251&addons=3&head=72&body=132&legs=114&feet=132"
+                  alt=""
+                />
               </td>
               <td>
                 <h5 className="mb-1 text-muted">
-                  <a href="#">Nickname</a>
+                  <Link to="#">Nickname</Link>
                 </h5>
                 <small className="text-muted">
                   <strong>999</strong> Elite knight
@@ -26,9 +30,9 @@ const BuyCharacterWidget = () => {
             <tr>
               <td colSpan={2}>
                 <center>
-                  <a className="btn btn-primary btn-sm mt-1" href="#">
+                  <Link className="btn btn-primary btn-sm mt-1" to="#">
                     <i className="fas fa-info-circle" /> More Information
-                  </a>
+                  </Link>
                   <center />
                 </center>
               </td>

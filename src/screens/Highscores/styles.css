@@ -9,7 +9,6 @@
 
 .table-highscores tr td {
   padding: 10px;
-  border-bottom: 1px solid #ccbfdf;
 }
 
 .table-highscores th {
@@ -23,17 +22,6 @@
 .table-highscores tr:hover {
   cursor: pointer;
 }
-
-/* button */
-
-/* button {
-  padding: 8px 16px;
-}
-
-button:hover {
-  background-color: #9d4edd;
-  color: white;
-} */
 
 .previous {
   background-color: var(--primary);
@@ -74,7 +62,9 @@ button:hover {
   position: relative;
   line-height: 2.5em;
   text-indent: 3.25em;
-  margin-top: 2em;
+  width: 22.1rem;
+  margin-left: 0.5em;
+  margin-bottom: 1rem;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;

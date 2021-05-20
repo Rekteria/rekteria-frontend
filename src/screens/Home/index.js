@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { forumBoard } from '../../actions/ForumActions';
 
@@ -6,10 +6,11 @@ import Container from '../Layouts/Container';
 
 import IconPlus from '../../assets/img/plus.gif';
 import IconMinus from '../../assets/img/minus.gif';
+import { Link } from 'react-router-dom';
 
 const Home = ({ forumBoard }) => {
   // const [newsPost, setNewsPost] = useState([]);
-  // const [postInteraction, setPostInteraction] = useState(false);
+  // const [postInteraction, setPostInteraction] = React.useState(false);
   const [isOpened, setIsOpened] = React.useState(false);
 
   // function interaction() {
@@ -51,7 +52,7 @@ const Home = ({ forumBoard }) => {
                 }}
               >
                 News Ticker
-                <a href="changelog.php" />
+                <Link to="changelog.php" />
               </td>
             </tr>
             <tr>
@@ -68,9 +69,9 @@ const Home = ({ forumBoard }) => {
                 </div>
               </td>
               <td width="1%">
-                <a className="tickerbtn" onClick={newsTickerToggle}>
-                  <img src={isOpened ? IconMinus : IconPlus} />
-                </a>
+                <span className="tickerbtn" onClick={newsTickerToggle}>
+                  <img src={isOpened ? IconMinus : IconPlus} alt="" />
+                </span>
               </td>
             </tr>
           </tbody>

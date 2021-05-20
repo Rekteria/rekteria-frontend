@@ -9,7 +9,7 @@ const Footer = () => {
           © Rekteria.net.
           <span style={{ opacity: '0.5' }}>
             <br />
-            Engine: <a href="credits.php">Znote AAC</a>
+            Engine: <Link to="https://github.com/HatiAAC/Hati">Hati AAC</Link>
           </span>
         </p>
       </div>

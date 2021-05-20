@@ -10,7 +10,10 @@ const AccountWidget = () => {
           <tbody>
             <tr>
               <td className="p-0">
-                <img src="http://outfit-images.ots.me/outfit.php?id=241&addons=3&head=72&body=132&legs=114&feet=132" />
+                <img
+                  src="http://outfit-images.ots.me/outfit.php?id=241&addons=3&head=72&body=132&legs=114&feet=132"
+                  alt=""
+                />
               </td>
               <td>
                 <h6 className="mb-1 text-muted">Zombie event</h6>
@@ -21,7 +24,10 @@ const AccountWidget = () => {
             </tr>
             <tr>
               <td>
-                <img src="http://outfit-images.ots.me/outfit.php?id=211&addons=3&head=72&body=132&legs=114&feet=132" />
+                <img
+                  src="http://outfit-images.ots.me/outfit.php?id=211&addons=3&head=72&body=132&legs=114&feet=132"
+                  alt=""
+                />
               </td>
               <td>
                 <h6 className="mb-1 text-muted">Other event</h6>

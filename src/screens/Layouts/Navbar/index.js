@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux';
+import { getAccount } from '../../../helpers/Account';
 
 import SmallLogo from '../../../assets/img/logo_small.png';
 
 const Menu = ({ mobile }) => {
-  const { account } = useSelector((account) => account.account);
+  const account = getAccount();
 
   return (
     <>
@@ -137,7 +137,7 @@ const Menu = ({ mobile }) => {
                 Statistics
               </Link>
               <div className="dropdown-menu">
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/highscores">
                   Highscores
                 </Link>
                 <Link className="dropdown-item" to="#">
@@ -221,10 +221,4 @@ const Menu = ({ mobile }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    account: state.account.account,
-  };
-};
-
-export default connect(mapStateToProps)(Menu);
+export default Menu;

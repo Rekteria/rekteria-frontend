@@ -1,6 +1,5 @@
-import Header from '../../components/Header'
-import ProductList from '../../components/Product/List'
-import './styles.css'
+import ProductList from '../../components/Product/List';
+import './styles.css';
 
 const Checkout = () => {
   return (
@@ -114,7 +113,7 @@ const Checkout = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;
