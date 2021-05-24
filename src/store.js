@@ -10,7 +10,6 @@ import inventoryReducer from './reducers/InventoryReducer';
 import pagarmeReducer from './reducers/PagarmeReducer';
 import paymentHistoryReducer from './reducers/PaymentHistoryReducer';
 import pixGerenciaReducer from './reducers/PixGerenciaReducer';
-import apiReducer from './reducers/ApiReducer';
 
 const reducers = combineReducers({
   account: accountReducer,
@@ -23,7 +22,6 @@ const reducers = combineReducers({
   pagarme: pagarmeReducer,
   paymentHistory: paymentHistoryReducer,
   pixGerencia: pixGerenciaReducer,
-  api: apiReducer,
 });
 
 const store = createStore(reducers, applyMiddleware(ReduxPromise));
