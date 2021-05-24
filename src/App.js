@@ -110,7 +110,7 @@ const App = ({ initAccount }) => {
           <Route exact path="/buycoins" component={BuyCoins} />
 
           <Route exact path="/" component={Home} />
-          <Route exact path="/api" />
+          <Route exact path="/login" />
         </Switch>
       </BrowserRouter>
     </>
