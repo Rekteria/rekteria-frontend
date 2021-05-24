@@ -15,7 +15,7 @@ module.exports = {
       base_URL: 'http://localhost:3001',
     },
     production: {
-      base_URL: 'http://rekteria.net/api',
+      base_URL: 'https://api.rekteria.net',
     },
   },
 
