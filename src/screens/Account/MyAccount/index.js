@@ -214,32 +214,35 @@ const MyAccount = ({
                                       {myAccount.location}
                                     </td>
                                   </tr>
-                                  {/* <tr>
-                                                          <td>Flag:</td>
-                                                          <td className="col-md-4">{Account?.flag}</td>
-                                                      </tr> */}
                                 </tbody>
                               </table>
 
-                              {myAccount.profileName !== '' ? null : (
-                                <span className="col-md-3 mb-1" align="right">
-                                  <Link to="/account/profile_name">
-                                    <button className="btn btn-primary btn-sm">
-                                      Set Profile Name
+                              <div className="row">
+                                <div className="col">
+                                  {myAccount.profileName !== '' ? null : (
+                                    <span
+                                      className="col-md-3 mb-1"
+                                      align="right"
+                                    >
+                                      <Link to="/account/profile_name">
+                                        <button className="btn btn-primary btn-sm">
+                                          Set Profile Name
+                                        </button>
+                                      </Link>
+                                    </span>
+                                  )}
+                                </div>
+                                <div className="col">
+                                  {' '}
+                                  <Link to="/account/profile">
+                                    <button
+                                      className="btn btn-primary btn-sm"
+                                      align="left"
+                                    >
+                                      Update Information
                                     </button>
                                   </Link>
-                                </span>
-                              )}
-
-                              <div className="d-flex justify-content-center">
-                                <Link to="/account/profile">
-                                  <button
-                                    className="btn btn-primary btn-sm"
-                                    align="left"
-                                  >
-                                    Update Information
-                                  </button>
-                                </Link>
+                                </div>
                               </div>
                             </div>
                           </div>

@@ -30,7 +30,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
 
     playerCreate(data)
       .then(() => {
-        history.push('/account/characters');
+        history.push('/account');
       })
       .catch((err) => {
         const metadata = err.response.data.metadata;
