@@ -34,7 +34,7 @@ const SignUp = ({ signUp, account, children }) => {
   toast.error(error);
 
   if (account) {
-    return <Redirect to="/account/characters" />;
+    return <Redirect to="/account" />;
   }
 
   return (

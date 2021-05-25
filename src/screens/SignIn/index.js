@@ -18,7 +18,7 @@ const SignIn = (props) => {
   const [loading, setLoading] = React.useState(false);
 
   if (account) {
-    return <Redirect to="/account/characters" />;
+    return <Redirect to="/account" />;
   }
 
   const submitHandler = (e) => {
