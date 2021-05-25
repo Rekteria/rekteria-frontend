@@ -186,7 +186,7 @@ const Highscores = ({ highscoresList, mobile }) => {
             <div className="col-md-7 col-sm-12 panel panel-default mt-3">
               <h4 className="font-weight-bold p-2">Highscores</h4>
               <div className="row">
-                <table className="table table-striped table-condensed">
+                <table className="table table-striped table-highscores">
                   <thead>
                     <tr>
                       <th width="1%">Rank</th>

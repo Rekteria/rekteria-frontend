@@ -27,69 +27,67 @@ const ProfileName = ({ profileName }) => {
 
   return (
     <Container>
-      <div id="contentBody" className="col-sm-9">
-        <div className="panel panel-default">
-          <div className="panel-heading">Add Profile Name</div>
-          <div className="panel-body">
-            <Error error={error} />
-            <form onSubmit={submitHandler}>
-              Here you can set your account's profile name.
-              <br />
-              Your profile name is a name that is used to publicly identify your
-              account.
-              <br />
-              <br />
-              Your profile name will be displayed:
-              <ul>
-                <li>
-                  <strong>When you post on the forum.</strong>
-                </li>
-                <li>On your account's public profile page.</li>
-                <li>
-                  On your character's profile page (unless your character is
-                  hidden.)
-                </li>
-              </ul>
-              <br />
-              Profile Name rules:
-              <ul>
-                <li>
-                  <strong>
-                    Do <u>NOT</u>
-                  </strong>{' '}
-                  use your account name or password.
-                </li>
-                <li>The name must be between 2 and 32 characters.</li>
-                <li>The name must not already be taken.</li>
-                <li>
-                  The name must properly represent your identity in our
-                  community. If you are a newer player, do not worry about this.
-                </li>
-                <li>The name must not contain profanity.</li>
-                <li>The name cannot be changed.</li>
-              </ul>
-              <br />
-              <strong>
-                You can only set your profile name <u>once</u>!
-              </strong>
-              <div className="form-group">
-                <label htmlFor="profileName">Profile Name:</label>
-                <input
-                  className="form-control"
-                  id="profileName"
-                  name="profileName"
-                />
-              </div>
-              <button type="submit" className="btn btn-success">
-                Add Profile Name
+      <div className="panel panel-default">
+        <div className="panel-heading">Add Profile Name</div>
+        <div className="panel-body">
+          <Error error={error} />
+          <form onSubmit={submitHandler}>
+            Here you can set your account's profile name.
+            <br />
+            Your profile name is a name that is used to publicly identify your
+            account.
+            <br />
+            <br />
+            Your profile name will be displayed:
+            <ul>
+              <li>
+                <strong>When you post on the forum.</strong>
+              </li>
+              <li>On your account's public profile page.</li>
+              <li>
+                On your character's profile page (unless your character is
+                hidden.)
+              </li>
+            </ul>
+            <br />
+            Profile Name rules:
+            <ul>
+              <li>
+                <strong>
+                  Do <u>NOT</u>
+                </strong>{' '}
+                use your account name or password.
+              </li>
+              <li>The name must be between 2 and 32 characters.</li>
+              <li>The name must not already be taken.</li>
+              <li>
+                The name must properly represent your identity in our community.
+                If you are a newer player, do not worry about this.
+              </li>
+              <li>The name must not contain profanity.</li>
+              <li>The name cannot be changed.</li>
+            </ul>
+            <br />
+            <strong>
+              You can only set your profile name <u>once</u>!
+            </strong>
+            <div className="form-group">
+              <label htmlFor="profileName">Profile Name:</label>
+              <input
+                className="form-control"
+                id="profileName"
+                name="profileName"
+              />
+            </div>
+            <button type="submit" className="btn btn-success">
+              Add Profile Name
+            </button>
+            <Link to="/account">
+              <button type="button" className="btn btn-primary ml-2">
+                Return
               </button>
-              <Link to="/account">
-                <button type="button" className="btn btn-primary ml-2">
-                  Return
-                </button>
-              </Link>
-            </form>
-          </div>
+            </Link>
+          </form>
         </div>
       </div>
     </Container>
