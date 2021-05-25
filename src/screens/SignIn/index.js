@@ -34,27 +34,8 @@ const SignIn = (props) => {
 
   return (
     <Container>
-      <div className="row">
-        <div className="col col-md-6 col-lg-7 hidden-sm-down">
-          <h2 className="fs-xxl fw-500 mt-4 text-primary">
-            If your HatiAAC Account is already connected to an authenticator,
-            click on "Use Authenticator". A field will be displayed which allows
-            you to provide your authenticator token along with your account data
-            upon login. Otherwise, you will be asked for your authenticator
-            token in the next stepaccmanage.
-            <small className="h3 fw-300 mt-3 mb-5 text-primary opacity-60">
-              An authenticator is a security feature which helps to prevent any
-              unauthorised access to your Kivera-Global account! You can connect
-              your account to an authenticator via your account management page.
-            </small>
-          </h2>
-          <Link to="/">
-            <span className="fs-lg fw-500 text-primary opacity-70">
-              Learn more &gt;&gt;
-            </span>
-          </Link>
-        </div>
-        <div className="col-sm-12 col-md-6 col-lg-5 col-xl-4 ml-auto">
+      <div className="row" style={{ marginTop: '10px' }}>
+        <div className="col-sm-12">
           <h1 className="text-primary fw-300 mb-3 d-sm-block d-md-none">
             Secure login
           </h1>
