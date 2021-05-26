@@ -17,11 +17,7 @@ const Topbar = () => {
       {/*
 <div className="el">Boosted Creature: <div className="monsterbox" style="background-image: url(https://static.tibia.com/images/global/header/monsters/demon.gif);"></div></div>
 */}
-      <Link
-        href="#"
-        className="btn btn-topbar btn-sm"
-        style={{ float: 'right' }}
-      >
+      <Link to="#" className="btn btn-topbar btn-sm" style={{ float: 'right' }}>
         <i className="fas fa-file-download" /> Download Client{' '}
         <span style={{ opacity: '0.8' }}>10.00/12.61</span>
       </Link>

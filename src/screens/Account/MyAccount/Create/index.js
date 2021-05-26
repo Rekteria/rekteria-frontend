@@ -30,7 +30,8 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
 
     playerCreate(data)
       .then(() => {
-        history.push('/account');
+        toast.success('Your character was created successfully, good game.');
+        setTimeout(() => history.push('/account'), 5000);
       })
       .catch((err) => {
         const metadata = err.response.data.metadata;

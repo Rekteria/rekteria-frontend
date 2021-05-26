@@ -50,7 +50,6 @@ const Profile = ({ characterPage }) => {
           <tr>
             <td>Created at:</td>
             <td>{convertTimestempToDate(characterPage.create_date)}</td>
-            {console.log(characterPage.create_date)}
           </tr>
           <tr>
             <td>Account Status:</td>

@@ -45,8 +45,8 @@
 
 .radio-btn {
   margin: 10px;
-  width: 180px;
-  height: 200px;
+  width: 117px;
+  height: 107px;
   border: 3px solid transparent;
   display: inline-block;
   border-radius: 10px;
@@ -54,6 +54,7 @@
   text-align: center;
   box-shadow: 0 0 20px #c3c3c367;
   cursor: pointer;
+  margin-bottom: 100px;
 }
 
 .radio-btn > i {

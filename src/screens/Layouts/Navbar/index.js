@@ -1,11 +1,46 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { playerGetCharacter } from '../../../actions/PlayerActions';
 import { getAccount } from '../../../helpers/Account';
 
 import SmallLogo from '../../../assets/img/logo_small.png';
+import SearchInput from '../../../components/PageSearch/SearchInput';
 
 const Menu = ({ mobile }) => {
   const account = getAccount();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [searchName, setSearchName] = React.useState('');
+  const [fulfilledName, setFulfilledName] = React.useState('');
+
+  React.useEffect(() => {
+    if (searchName) {
+      setFulfilledName('');
+
+      dispatch(playerGetCharacter(searchName))
+        .then(({ payload }) => {
+          setFulfilledName(payload.data.data.rows[0].name);
+        })
+        .catch((err) => {
+          const { data } = err.response;
+
+          history.push({
+            pathname: '/PageSearch',
+            customNameData: { error: data.message, name: searchName },
+          });
+        });
+    }
+  }, [searchName]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (fulfilledName) {
+      history.push(`/character/${fulfilledName}`);
+    }
+  };
 
   return (
     <>
@@ -60,7 +95,7 @@ const Menu = ({ mobile }) => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="forum.php">
+              <Link className="nav-link" to="/forum">
                 Forum
               </Link>
             </li>
@@ -199,21 +234,32 @@ const Menu = ({ mobile }) => {
             </li>
           </ul>
         </div>
-        <form action="characterprofile.php" method="get" className="mr-3">
+
+        <form
+          onSubmit={submitHandler}
+          className="app-forms hidden-xs-down mr-3"
+          role="search"
+          autoComplete="off"
+        >
           <div className="input-group me-2">
-            <input
-              type="text"
-              name="name"
-              className="form-control"
-              placeholder="Character name"
-              aria-label="Character name"
-              aria-describedby="basic-addon2"
+            <SearchInput
+              value={searchName}
+              onChange={(search) => setSearchName(search)}
             />
-            <div className="input-group-append">
-              <button className="btn btn-primary" type="submit">
-                <i className="fas fa-search" /> Search
-              </button>
-            </div>
+
+            {!searchName && !fulfilledName ? (
+              <div className="input-group-append">
+                <button className="btn btn-primary disabled" type="submit">
+                  <i className="fas fa-search" />
+                </button>
+              </div>
+            ) : (
+              <div className="input-group-append">
+                <button className="btn btn-primary" type="submit">
+                  <i className="fas fa-search" /> <span>Search</span>
+                </button>
+              </div>
+            )}
           </div>
         </form>
       </nav>

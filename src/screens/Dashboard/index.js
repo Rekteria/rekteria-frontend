@@ -39,7 +39,7 @@ const Dashboard = ({
   }, [getShopList]);
 
   if (!getAccount()[0]?.group_id) {
-    return <Redirect to="/sign-in" />;
+    return <Redirect to="/" />;
   }
 
   const submitHandle = (e) => {

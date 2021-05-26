@@ -765,6 +765,27 @@ a {
   border-bottom-color: #ebccd1;
 }
 
+/* profile images */
+.profile-image-lg {
+  width: 6.125rem;
+  height: 6.125rem;
+}
+
+.profile-image {
+  width: 3.125rem;
+  height: 3.125rem;
+}
+
+.profile-image-md {
+  width: 2rem;
+  height: 2rem;
+}
+
+.profile-image-sm {
+  width: 1.5625rem;
+  height: 1.5625rem;
+}
+
 /* Small devices (landscape phones, 576px and up) */
 @media only screen and (max-width: 576px) {
   body {

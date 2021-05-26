@@ -8,7 +8,7 @@ import Container from '../Layouts/Container';
 import SignUpBackground from '../../assets/img/backgrounds/pattern-1.svg';
 import { toast, ToastContainer } from 'react-toastify';
 
-const SignUp = ({ signUp, account, children }) => {
+const SignUp = ({ signUp, account }) => {
   const history = useHistory();
   const [error, setError] = React.useState();
 
@@ -17,7 +17,7 @@ const SignUp = ({ signUp, account, children }) => {
     const data = getFormData(e);
     signUp(data)
       .then(({ payload }) => {
-        history.push('/sign-in');
+        history.push('/');
       })
       .catch((err) => {
         const { data } = err.response;
@@ -136,35 +136,21 @@ const SignUp = ({ signUp, account, children }) => {
                   </div>
 
                   <div className="form-group demo">
-                    <div className="custom-control custom-checkbox">
+                    <div class="form-check">
                       <input
+                        class="form-check-input"
                         type="checkbox"
-                        className="custom-control-input"
-                        name="isTerms"
-                        id="isTerms"
+                        value=""
+                        id="invalidCheck"
+                        required
                       />
-                      <label className="custom-control-label" htmlFor="isTerms">
-                        {' '}
-                        I agree to terms &amp; conditions
+                      <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
                       </label>
-                      <div className="invalid-feedback">
-                        You must agree before proceeding
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
                       </div>
                     </div>
-                    {/* <div className="custom-control custom-checkbox">
-											<input
-												type="checkbox"
-												className="custom-control-input"
-												id="newsletter"
-											/>
-											<label
-												className="custom-control-label"
-												htmlFor="newsletter"
-											>
-												Sign up for newsletters (dont worry, we won't send so
-												many)
-											</label>
-										</div> */}
                   </div>
                   <div className="row no-gutters">
                     <div className="col-md-4 ml-auto text-right">

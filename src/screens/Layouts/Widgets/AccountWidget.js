@@ -13,6 +13,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { FaSignInAlt } from 'react-icons/fa';
 
 import { TextField } from '../../../components/Input/TextField';
+import ProfileAvatar from '../../../assets/img/Profile_Avatar.png';
 
 const AccountWidget = ({ account }) => {
   const dispatch = useDispatch();
@@ -29,9 +30,9 @@ const AccountWidget = ({ account }) => {
       .required('Password is required'),
   });
 
-  if (account) {
-    return <Redirect to="/account" />;
-  }
+  // if (account) {
+  //   return <Redirect to="/account" />;
+  // }
 
   return (
     <Formik
@@ -56,41 +57,112 @@ const AccountWidget = ({ account }) => {
         <div className="col-bg">
           <h3>Account</h3>
           <hr />
-          <Form className="form-signin">
-            <TextField
-              type="text"
-              placeholder="Your account name"
-              name="name"
-            />
-            <TextField
-              type="password"
-              name="password"
-              placeholder="Password"
-              className="form-control"
-            />
-            <button
-              className="btn btn-secondary btn-block w-100 mb-2 mt-2"
-              type="submit"
-              disabled={loading ? true : false}
-            >
-              <FaSignInAlt size={20} className="mr-2" />
-              {loading ? 'Loading... ' : 'Login'}
-            </button>
-          </Form>
-          <Link to="/sign-up">
-            <button
-              className="btn btn-warning btn-block w-100 mb-2"
-              type="submit"
-            >
-              <i className="fas fa-user-plus" /> Create New Account
-            </button>
-          </Link>
 
-          <center>
-            <a href="recovery.php" id="forgot_pswd">
-              Lost Acount?
-            </a>
-          </center>
+          {account ? (
+            <>
+              <div className="card mb-g rounded-top">
+                <div className="row no-gutters row-grid">
+                  <div className="col-12">
+                    <div className="d-flex flex-column align-items-center justify-content-center p-4">
+                      {account.avatar === '' ? (
+                        <img
+                          src={ProfileAvatar}
+                          alt={ProfileAvatar}
+                          style={{
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'center',
+                            backgroundSize: 'cover',
+                          }}
+                        />
+                      ) : (
+                        <div className="imagem-avatar">
+                          <img
+                            src={`https://api.rekteria.net/${account.avatar}`}
+                            alt="Avatar"
+                            className="profile-image-lg rounded-circle"
+                          />
+                        </div>
+                      )}
+                      <h5 className="mb-0 fw-700 text-center mt-3">
+                        <span className="subheader-title text-truncate text-truncate-lg text-primary mr-2">
+                          {account?.profileName},
+                        </span>
+                        <small className="text-muted mb-0">
+                          {account?.location}
+                        </small>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="col">
+                    <div className="text-center py-1">
+                      <h5 className="mb-0 fw-700">
+                        You have {account?.coins}
+                        <small className="text-muted mb-0 ml-2">Coins</small>
+                        <button
+                          type="button"
+                          class="btn btn-primary btn-sm ml-2"
+                        >
+                          Buy Coins
+                        </button>
+                      </h5>
+                    </div>
+                  </div>
+                  <div className="col-12">
+                    <div className="p-3 text-center">
+                      <Link to="/account" className="btn-link font-weight-bold">
+                        My Account
+                      </Link>
+                      <span className="text-primary d-inline-block m-1">●</span>
+                      <Link
+                        to="/account/characters/create"
+                        className="btn-link font-weight-bold"
+                      >
+                        Create Character
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <Form className="form-signin">
+                <TextField
+                  type="text"
+                  placeholder="Your account name"
+                  name="name"
+                />
+                <TextField
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className="form-control"
+                />
+                <button
+                  className="btn btn-secondary btn-block w-100 mb-2 mt-2"
+                  type="submit"
+                  disabled={loading ? true : false}
+                >
+                  <FaSignInAlt size={20} className="mr-2" />
+                  {loading ? 'Loading... ' : 'Login'}
+                </button>
+              </Form>
+              <Link to="/sign-up">
+                <button
+                  className="btn btn-warning btn-block w-100 mb-2"
+                  type="submit"
+                >
+                  <i className="fas fa-user-plus" /> Create New Account
+                </button>
+              </Link>
+
+              <center>
+                <a href="recovery.php" id="forgot_pswd">
+                  Lost Acount?
+                </a>
+              </center>
+            </>
+          )}
           <ToastContainer className="toast-message" />
         </div>
       )}

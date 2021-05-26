@@ -13,7 +13,7 @@ import {
 import { playerList } from '../../../actions/PlayerActions';
 import ProfileAvatar from '../../../assets/img/Profile_Avatar.png';
 
-import { getPlayerName } from '../../../helpers/Account';
+// import { getPlayerName } from '../../../helpers/Account';
 import { convertTimestempToDate } from '../../../helpers/DateTime';
 import Container from '../../Layouts/Container';
 import PaymentHistory from '../PaymentHistory';
@@ -98,293 +98,285 @@ const MyAccount = ({
           </div>
 
           <div className="panel-body">
-            {getPlayerName() === undefined ? null : (
-              <div className="panel-content">
-                <div className="border px-3 pt-3 pb-0 rounded">
-                  <ul className="nav nav-pills" role="tablist">
-                    <li className="nav-item">
-                      <a
-                        className="nav-link active"
-                        data-toggle="tab"
-                        href="#account-information"
-                      >
-                        <i className="fas fa-home mr-1"></i>Account Information
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        className="nav-link"
-                        data-toggle="tab"
-                        href="#account-profile"
-                      >
-                        <i className="fas fa-user mr-1"></i>Profile
-                      </a>
-                    </li>
-
-                    <li className="nav-item">
-                      <a
-                        className="nav-link"
-                        data-toggle="tab"
-                        href="#account-paymenthistory"
-                      >
-                        <i className="fas fa-credit-card mr-1"></i>Payments
-                        History
-                      </a>
-                    </li>
-                  </ul>
-                  <div className="tab-content py-3">
-                    <div
-                      className="tab-pane fade active show"
-                      id="account-information"
-                      role="tabpanel"
+            <div className="panel-content">
+              <div className="border px-3 pt-3 pb-0 rounded">
+                <ul className="nav nav-pills" role="tablist">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      data-toggle="tab"
+                      href="#account-information"
                     >
-                      <div className="panel panel-default">
-                        <div className="panel-heading">Account Information</div>
-                        <div className="panel-body">
-                          <table className="table table-striped table-hover table-fixed">
-                            <tbody>
-                              <tr>
-                                <td>Name</td>
-                                <td>{myAccount.name}</td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>E-mail Address</td>
-                                <td>{myAccount.email}</td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>Created</td>
-                                <td className="col-md-9">
-                                  {convertTimestempToDate(myAccount.creation)}
-                                </td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td className="col-md-2 notranslate">
-                                  Hati Coins
-                                </td>
-                                <td>{myAccount.coins}</td>
-                                <td></td>
-                              </tr>
-                              <tr>
-                                <td>Premium Account</td>
-                                <td>(Premmium Days: {myAccount.premdays})</td>
-                              </tr>
-                            </tbody>
-                          </table>
+                      <i className="fas fa-home mr-1"></i>Account Information
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-toggle="tab"
+                      href="#account-profile"
+                    >
+                      <i className="fas fa-user mr-1"></i>Profile
+                    </a>
+                  </li>
 
-                          <Link to="/account/password">
-                            <button className="btn btn-primary btn-sm mr-3">
-                              Change Password
-                            </button>
-                          </Link>
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={signOutHandler}
-                          >
-                            Logout
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      data-toggle="tab"
+                      href="#account-paymenthistory"
+                    >
+                      <i className="fas fa-credit-card mr-1"></i>Payments
+                      History
+                    </a>
+                  </li>
+                </ul>
+                <div className="tab-content py-3">
+                  <div
+                    className="tab-pane fade active show"
+                    id="account-information"
+                    role="tabpanel"
+                  >
+                    <div className="panel panel-default">
+                      <div className="panel-heading">Account Information</div>
+                      <div className="panel-body">
+                        <table className="table table-striped table-hover table-fixed">
+                          <tbody>
+                            <tr>
+                              <td>Name</td>
+                              <td>{myAccount.name}</td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td>E-mail Address</td>
+                              <td>{myAccount.email}</td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td>Created</td>
+                              <td className="col-md-9">
+                                {convertTimestempToDate(myAccount.creation)}
+                              </td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td className="col-md-2 notranslate">
+                                Hati Coins
+                              </td>
+                              <td>{myAccount.coins}</td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td>Premium Account</td>
+                              <td>(Premmium Days: {myAccount.premdays})</td>
+                            </tr>
+                          </tbody>
+                        </table>
+
+                        <Link to="/account/password">
+                          <button className="btn btn-primary btn-sm mr-3">
+                            Change Password
                           </button>
-                        </div>
+                        </Link>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={signOutHandler}
+                        >
+                          Logout
+                        </button>
                       </div>
                     </div>
-                    <div
-                      className="tab-pane fade"
-                      id="account-profile"
-                      role="tabpanel"
-                    >
-                      <div className="row">
-                        <div className="col-md-6">
-                          <div className="panel panel-default">
-                            <div className="panel-heading">
-                              Profile Information
-                            </div>
-                            <div className="panel-body">
-                              <table className="table table-striped table-hover table-fixed">
-                                <tbody>
-                                  <tr>
-                                    <td>Real Name:</td>
-                                    <td className="col-md-4 notranslate">
-                                      {myAccount.rlname}
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <td>Location:</td>
-                                    <td className="col-md-4">
-                                      {myAccount.location}
-                                    </td>
-                                  </tr>
-                                </tbody>
-                              </table>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="account-profile"
+                    role="tabpanel"
+                  >
+                    <div className="row">
+                      <div className="col-md-6">
+                        <div className="panel panel-default">
+                          <div className="panel-heading">
+                            Profile Information
+                          </div>
+                          <div className="panel-body">
+                            <table className="table table-striped table-hover table-fixed">
+                              <tbody>
+                                <tr>
+                                  <td>Real Name:</td>
+                                  <td className="col-md-4 notranslate">
+                                    {myAccount.rlname}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td>Location:</td>
+                                  <td className="col-md-4">
+                                    {myAccount.location}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
 
-                              <div className="row">
-                                <div className="col">
-                                  {myAccount.profileName !== '' ? null : (
-                                    <span
-                                      className="col-md-3 mb-1"
-                                      align="right"
-                                    >
-                                      <Link to="/account/profile_name">
-                                        <button className="btn btn-primary btn-sm">
-                                          Set Profile Name
-                                        </button>
-                                      </Link>
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="col">
-                                  {' '}
-                                  <Link to="/account/profile">
-                                    <button
-                                      className="btn btn-primary btn-sm"
-                                      align="left"
-                                    >
-                                      Update Information
-                                    </button>
-                                  </Link>
-                                </div>
+                            <div className="row">
+                              <div className="col">
+                                {myAccount.profileName !== '' ? null : (
+                                  <span className="col-md-3 mb-1" align="right">
+                                    <Link to="/account/profile_name">
+                                      <button className="btn btn-primary btn-sm">
+                                        Set Profile Name
+                                      </button>
+                                    </Link>
+                                  </span>
+                                )}
+                              </div>
+                              <div className="col">
+                                {' '}
+                                <Link to="/account/profile">
+                                  <button
+                                    className="btn btn-primary btn-sm"
+                                    align="left"
+                                  >
+                                    Update Information
+                                  </button>
+                                </Link>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className="col-md-6">
-                          <div className="panel panel-default">
-                            <div className="panel-heading">Profile Avatar</div>
-                            <div className="panel-body" align="center">
-                              <div className="fc-toolbar fc-header-toolbar">
-                                <div className="fc-left">
-                                  <h2 className="fs-md">
-                                    {' '}
-                                    <span className="subheader-title text-truncate text-truncate-lg text-primary">
-                                      {myAccount.profileName}
-                                    </span>
-                                  </h2>
-                                </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="panel panel-default">
+                          <div className="panel-heading">Profile Avatar</div>
+                          <div className="panel-body" align="center">
+                            <div className="fc-toolbar fc-header-toolbar">
+                              <div className="fc-left">
+                                <h2 className="fs-md">
+                                  {' '}
+                                  <span className="subheader-title text-truncate text-truncate-lg text-primary">
+                                    {myAccount.profileName}
+                                  </span>
+                                </h2>
                               </div>
-                              {myAccount.avatar === '' ? (
+                            </div>
+                            {myAccount.avatar === '' ? (
+                              <img
+                                src={ProfileAvatar}
+                                alt={ProfileAvatar}
+                                style={{
+                                  backgroundRepeat: 'no-repeat',
+                                  backgroundPosition: 'center',
+                                  backgroundSize: 'cover',
+                                }}
+                              />
+                            ) : (
+                              <div className="imagem-avatar">
                                 <img
-                                  src={ProfileAvatar}
-                                  alt={ProfileAvatar}
-                                  style={{
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: 'center',
-                                    backgroundSize: 'cover',
-                                  }}
+                                  src={avatar}
+                                  alt="Avatar"
+                                  className="profile-image rounded-circle"
                                 />
-                              ) : (
-                                <div className="imagem-avatar">
-                                  <img
-                                    src={avatar}
-                                    alt="Avatar"
-                                    className="profile-image rounded-circle"
-                                  />
-                                  <div
-                                    className="avatar-delete"
-                                    data-toggle="modal"
-                                    data-target=".example-modal-centered-transparent"
-                                  >
-                                    <RiDeleteBin6Line
-                                      size={30}
-                                      color="#114a4d"
-                                    />
-                                  </div>
-                                </div>
-                              )}
-
-                              <div
-                                className="modal fade example-modal-centered-transparent"
-                                id="newCategory"
-                                tabIndex="-1"
-                                role="dialog"
-                                aria-hidden="true"
-                                style={{ display: 'none' }}
-                              >
                                 <div
-                                  className="modal-dialog modal-dialog-centered modal-transparent"
-                                  role="document"
+                                  className="avatar-delete"
+                                  data-toggle="modal"
+                                  data-target=".example-modal-centered-transparent"
                                 >
-                                  <div className="modal-content">
-                                    <div className="modal-header">
-                                      <h4 className="modal-titlef">
-                                        do you want to delete this avatar?
-                                        <small className="m-0 opacity-70">
-                                          do you really intend to delete your
-                                          avatar? you will delete it from our
-                                          database, and you will not be able to
-                                          recover it again.
-                                        </small>
-                                      </h4>
-                                      <button
-                                        type="button"
-                                        className="close"
-                                        data-dismiss="modal"
-                                        aria-label="Close"
-                                      >
-                                        <span aria-hidden="true">
-                                          <i className="fa fa-times"></i>
-                                        </span>
-                                      </button>
-                                    </div>
+                                  <RiDeleteBin6Line size={30} color="#114a4d" />
+                                </div>
+                              </div>
+                            )}
 
-                                    <div className="modal-footer">
-                                      <button
-                                        type="button"
-                                        className="btn btn-secondary waves-effect waves-themed"
-                                        data-dismiss="modal"
-                                      >
-                                        Close
-                                      </button>
-                                      <button
-                                        type="button"
-                                        className="btn btn-primary waves-effect waves-themed"
-                                        data-dismiss="modal"
-                                        onClick={handleDeleteAvatar}
-                                      >
-                                        Delete
-                                      </button>
-                                    </div>
+                            <div
+                              className="modal fade example-modal-centered-transparent"
+                              id="newCategory"
+                              tabIndex="-1"
+                              role="dialog"
+                              aria-hidden="true"
+                              style={{ display: 'none' }}
+                            >
+                              <div
+                                className="modal-dialog modal-dialog-centered modal-transparent"
+                                role="document"
+                              >
+                                <div className="modal-content">
+                                  <div className="modal-header">
+                                    <h4 className="modal-titlef">
+                                      do you want to delete this avatar?
+                                      <small className="m-0 opacity-70">
+                                        do you really intend to delete your
+                                        avatar? you will delete it from our
+                                        database, and you will not be able to
+                                        recover it again.
+                                      </small>
+                                    </h4>
+                                    <button
+                                      type="button"
+                                      className="close"
+                                      data-dismiss="modal"
+                                      aria-label="Close"
+                                    >
+                                      <span aria-hidden="true">
+                                        <i className="fa fa-times"></i>
+                                      </span>
+                                    </button>
+                                  </div>
+
+                                  <div className="modal-footer">
+                                    <button
+                                      type="button"
+                                      className="btn btn-secondary waves-effect waves-themed"
+                                      data-dismiss="modal"
+                                    >
+                                      Close
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="btn btn-primary waves-effect waves-themed"
+                                      data-dismiss="modal"
+                                      onClick={handleDeleteAvatar}
+                                    >
+                                      Delete
+                                    </button>
                                   </div>
                                 </div>
                               </div>
+                            </div>
 
-                              <br />
-                              <br />
+                            <br />
+                            <br />
 
-                              {avatar && avatar?.length > 0 ? (
+                            {avatar && avatar?.length > 0 ? (
+                              <button
+                                className="btn btn-primary btn-sm disabled"
+                                align="center"
+                                disabled
+                              >
+                                Update Avatar
+                              </button>
+                            ) : (
+                              <Link to="/account/avatar">
                                 <button
-                                  className="btn btn-primary btn-sm disabled"
+                                  className="btn btn-primary btn-sm"
                                   align="center"
-                                  disabled
                                 >
                                   Update Avatar
                                 </button>
-                              ) : (
-                                <Link to="/account/avatar">
-                                  <button
-                                    className="btn btn-primary btn-sm"
-                                    align="center"
-                                  >
-                                    Update Avatar
-                                  </button>
-                                </Link>
-                              )}
-                            </div>
+                              </Link>
+                            )}
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <div
-                      className="tab-pane fade"
-                      id="account-paymenthistory"
-                      role="tabpanel"
-                    >
-                      <PaymentHistory />
-                    </div>
+                  <div
+                    className="tab-pane fade"
+                    id="account-paymenthistory"
+                    role="tabpanel"
+                  >
+                    <PaymentHistory />
                   </div>
                 </div>
               </div>
-            )}
+            </div>
 
             <div className="panel panel-default mt-3">
               <div className="panel-heading">Characters</div>
