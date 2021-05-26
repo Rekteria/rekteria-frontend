@@ -13,6 +13,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import { FaSignInAlt } from 'react-icons/fa';
 
 import { TextField } from '../../../components/Input/TextField';
+import Button from '../../../components/Button';
+
 import ProfileAvatar from '../../../assets/img/Profile_Avatar.png';
 
 const AccountWidget = ({ account }) => {
@@ -41,7 +43,8 @@ const AccountWidget = ({ account }) => {
         password: '',
       }}
       validationSchema={validate}
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
+        setLoading(true);
         dispatch(signIn(values))
           .then(() => {
             history.push('/account');
@@ -50,6 +53,7 @@ const AccountWidget = ({ account }) => {
             const { data } = err.response;
             toast.error(data.message);
             setLoading(false);
+            resetForm();
           });
       }}
     >
@@ -138,14 +142,22 @@ const AccountWidget = ({ account }) => {
                   placeholder="Password"
                   className="form-control"
                 />
-                <button
+                {/* <button
                   className="btn btn-secondary btn-block w-100 mb-2 mt-2"
                   type="submit"
                   disabled={loading ? true : false}
                 >
                   <FaSignInAlt size={20} className="mr-2" />
                   {loading ? 'Loading... ' : 'Login'}
-                </button>
+                </button> */}
+                <Button
+                  className="btn btn-info btn-block btn-lg waves-effect waves-themed mb-2"
+                  type="submit"
+                  disabled={loading ? true : false}
+                >
+                  <FaSignInAlt size={20} className="mr-2" />
+                  {loading ? 'Loading... ' : 'Sign-in'}
+                </Button>
               </Form>
               <Link to="/sign-up">
                 <button
