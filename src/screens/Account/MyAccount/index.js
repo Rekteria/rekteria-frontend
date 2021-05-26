@@ -55,7 +55,7 @@ const MyAccount = ({
   }
 
   if (!account) {
-    return <Redirect to="/sign-in" />;
+    return <Redirect to="/" />;
   }
 
   const signOutHandler = (event) => {
