@@ -33,7 +33,7 @@ const Menu = ({ mobile }) => {
           });
         });
     }
-  }, [searchName]);
+  }, [searchName, dispatch, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();

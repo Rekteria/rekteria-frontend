@@ -1,14 +1,16 @@
 import React from 'react';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { connect } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { getFormData } from '../../../../helpers/FormData';
 import { forumNewThread } from '../../../../actions/ForumActions';
 import { playerList } from '../../../../actions/PlayerActions';
 import { hideNewThread } from '../../../../assets/js/scripts';
-
 import JoditEditor from '../../../../components/Jodit';
+import { getFormData } from '../../../../helpers/FormData';
+import { getAccount } from '../../../../helpers/Account';
 
 const CreateThread = ({ forumNewThread, playerList, interaction }) => {
+  const account = getAccount();
   const [newThread, setNewThread] = React.useState([]);
   const { board_id } = useParams();
   const history = useHistory();
@@ -34,10 +36,7 @@ const CreateThread = ({ forumNewThread, playerList, interaction }) => {
       });
   };
 
-  if (
-    newThread[0]?.account.profileName === '' ||
-    newThread[0]?.account.profileName === null
-  ) {
+  if (account?.profileName === '' || account?.profileName === null) {
     history.push('/account/profile_name');
   }
 
@@ -51,13 +50,15 @@ const CreateThread = ({ forumNewThread, playerList, interaction }) => {
         <div className="position-relative h-100 w-100 d-flex flex-column">
           {/* desktop view */}
           <div className="panel-hdr bg-fusion-600 height-4 d-none d-sm-none d-lg-flex">
-            <h4 className="flex-1 fs-lg color-white mb-0 pl-3">New Thread</h4>
+            <h4 className="flex-1 fs-lg color-white mb-0 pl-3 mt-3">
+              New Thread
+            </h4>
             <div className="panel-toolbar pr-2">
               <span
                 className="btn btn-icon btn-icon-light fs-xl waves-effect waves-themed"
                 onClick={() => hideNewThread()}
               >
-                <i className="fal fa-times" />
+                <AiOutlineCloseCircle size={20} color="#fff" />
               </span>
             </div>
           </div>
@@ -88,9 +89,9 @@ const CreateThread = ({ forumNewThread, playerList, interaction }) => {
               >
                 <option
                   key={newThread[0]?.account_id}
-                  value={newThread[0]?.account.profileName}
+                  value={account?.profileName}
                 >
-                  {newThread[0]?.account.profileName}
+                  {account?.profileName}
                 </option>
               </select>
 
@@ -102,12 +103,6 @@ const CreateThread = ({ forumNewThread, playerList, interaction }) => {
               />
             </div>
             <div className="flex-1" style={{ overflowY: 'auto' }}>
-              {/* <textarea
-								className="form-control"
-								name="body_text"
-								rows="13"
-								required
-							></textarea> */}
               <JoditEditor name="body_text" tabIndex={1} />
             </div>
 

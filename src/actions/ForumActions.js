@@ -1,4 +1,11 @@
-import { apiPostNews, apiGet, apiLike, apiPost, apiDelete, apiPut } from '../helpers/Api';
+import {
+  apiPostNews,
+  apiGet,
+  apiLike,
+  apiPost,
+  apiDelete,
+  apiPut,
+} from '../helpers/Api';
 
 export const NEWS_CREATE = 'NEWS_CREATE';
 export const LIKE_UPDATE = 'LIKE_UPDATE';
@@ -44,10 +51,6 @@ export const forumBoard = (board_id) => {
   const payload = apiGet(`/forum/thread/${board_id}`);
   return { type: SECTION_LIST, payload };
 };
-export const getAllThreads = (data) => {
-  const payload = apiGet('/forum/thread/all', data);
-  return { type: GET_ALL_THREADS, payload };
-};
 
 export const forumNewThread = (board_id, data) => {
   const payload = apiPostNews(`/forum/newThread/${board_id}`, data);
@@ -74,12 +77,18 @@ export const editPost = (id, data) => {
 };
 
 export const getComments = (board_id, discussion, data) => {
-  const payload = apiGet(`/forum/thread/${board_id}/${discussion}/comments`, data);
+  const payload = apiGet(
+    `/forum/thread/${board_id}/${discussion}/comments`,
+    data
+  );
   return { type: GET_COMMENT, payload };
 };
 
 export const addComments = (board_id, discussion, data) => {
-  const payload = apiPost(`/forum/thread/${board_id}/${discussion}/reply`, data);
+  const payload = apiPost(
+    `/forum/thread/${board_id}/${discussion}/reply`,
+    data
+  );
   return { type: ADD_COMMENT, payload };
 };
 

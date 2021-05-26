@@ -13,7 +13,6 @@ import {
   GET_COMMENT,
   THREAD_REMOVE,
   THREAD_TO_REMOVE,
-  GET_ALL_THREADS,
 } from '../actions/ForumActions';
 
 const initialState = {
@@ -33,8 +32,7 @@ export default function (state = initialState, action) {
     case EDIT_POST:
     case ADD_COMMENT:
     case GET_COMMENT:
-    case LIKE_UPDATE:
-    case GET_ALL_THREADS: {
+    case LIKE_UPDATE: {
       const response = payload ? payload.data : null;
       const forum = response ? response.data : null;
       return { ...state, forum };
@@ -47,7 +45,9 @@ export default function (state = initialState, action) {
 
     case THREAD_REMOVE:
     case BOARD_REMOVE: {
-      const forums = state.forums.filter((forum) => forum.id !== state.forumToRemove.id);
+      const forums = state.forums.filter(
+        (forum) => forum.id !== state.forumToRemove.id
+      );
       return { ...state, forumToRemove: null, forums };
     }
 

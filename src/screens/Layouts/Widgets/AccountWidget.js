@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { Formik, Form } from 'formik';
@@ -104,7 +104,7 @@ const AccountWidget = ({ account }) => {
                         <small className="text-muted mb-0 ml-2">Coins</small>
                         <button
                           type="button"
-                          class="btn btn-primary btn-sm ml-2"
+                          className="btn btn-primary btn-sm ml-2"
                         >
                           Buy Coins
                         </button>

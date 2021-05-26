@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { FaCrosshairs, FaSkullCrossbones } from 'react-icons/fa';
+// import { FaCrosshairs, FaSkullCrossbones } from 'react-icons/fa';
 import { convertTimestempToDate } from '../../helpers/DateTime';
 const DeathList = ({ playerDeaths }) => {
   return (

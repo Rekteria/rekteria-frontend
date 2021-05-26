@@ -9,10 +9,9 @@ import {
 } from '../../../actions/ForumActions';
 import { getImageUrl } from '../../../helpers/Api';
 
-import { formatDate } from '../../../helpers/DateTime';
+import { formatDate, convertTimestempToDate } from '../../../helpers/DateTime';
 import { getFormData } from '../../../helpers/FormData';
 import Container from '../../Layouts/Container';
-import LikeDeslikes from '../../../components/LikeDeslikes';
 import { BsReply } from 'react-icons/bs';
 
 import noneAvatar from '../../../assets/img/none_avatar.png';
@@ -71,23 +70,12 @@ const Discussions = ({
     });
   };
 
+  console.log(discussionPost);
+
   return (
     <Container>
       <div className="row">
         <div className="col-xl-12">
-          <div className="input-group input-group-lg mb-g">
-            <input
-              type="text"
-              className="form-control shadow-inset-2"
-              placeholder="Search Discussion"
-            />
-            <div className="input-group-append">
-              <span className="input-group-text">
-                <i className="fal fa-search" />
-              </span>
-            </div>
-          </div>
-
           <div className="panel panel-default hidden-xs hidden-sm">
             <div className="panel-heading">
               {formatDate(discussionPost.createdAt)}
@@ -120,7 +108,7 @@ const Discussions = ({
                   <br />
                   {account?.avatar ? (
                     <img
-                      src={getImageUrl(discussionPost.account.avatar)}
+                      src={getImageUrl(discussionPost?.account?.avatar)}
                       className="profile-image rounded-circle"
                       alt=""
                     />
@@ -132,12 +120,12 @@ const Discussions = ({
                     />
                   )}
                   <br />
-                  Country: BR
+                  Location: {account?.location}
                   <br />
-                  Member since: 10/12/2019
+                  Member since: {convertTimestempToDate(account?.creation)}
                   <br />
-                  Discord: Pedro#6666
-                  <br />
+                  {/* Discord: Pedro#6666
+                  <br /> */}
                 </div>
                 <div
                   className="col-md-10"
@@ -146,17 +134,6 @@ const Discussions = ({
               </div>
 
               <br />
-              <div className="row">
-                <div className="col-md-2">Administrador// IMG LATER</div>
-                <div className="col-md-4"></div>
-                <div className="col-md-6" align="right">
-                  <LikeDeslikes
-                    id={discussionPost.id}
-                    likes_count={discussionPost.likes_count}
-                    interaction={interaction}
-                  />
-                </div>
-              </div>
             </div>
           </div>
 
@@ -208,12 +185,14 @@ const Discussions = ({
                           alt=""
                         />
                       )}
+                      {console.log(comment)}
                       <br />
-                      Country: BR
+                      Location: {comment?.account.location}
                       <br />
-                      Member since: 10/12/2019
+                      Member since:{' '}
+                      {convertTimestempToDate(comment?.account?.creation)}
                       <br />
-                      Discord: Pedro#6666
+                      {/* Discord: Pedro#6666 */}
                       <br />
                     </div>
                     <div
@@ -226,15 +205,9 @@ const Discussions = ({
 
                   <br />
                   <div className="row">
-                    <div className="col-md-2">Administrador// IMG LATER</div>
+                    {/* <div className="col-md-2">Administrador// IMG LATER</div> */}
                     <div className="col-md-4"></div>
-                    <div className="col-md-6" align="right">
-                      {/* <LikeDeslikes
-              id={discussionPost.id}
-              likes_count={discussionPost.likes_count}
-              interaction={interaction}
-            /> */}
-                    </div>
+                    <div className="col-md-6" align="right"></div>
                   </div>
                 </div>
               </div>
