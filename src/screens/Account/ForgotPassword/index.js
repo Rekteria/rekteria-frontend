@@ -102,7 +102,7 @@ const ForgotPassword = ({ forgotPassword }) => {
                     </div>
                   </div>
                   <div className="d-block text-center text-primary">
-                    2020 © HatiAAC ;
+                    2021 © Rekteria;
                   </div>
                 </div>
               </div>

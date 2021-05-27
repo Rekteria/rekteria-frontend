@@ -257,7 +257,7 @@ const MyAccount = ({
                                 </h2>
                               </div>
                             </div>
-                            {myAccount.avatar === '' ? (
+                            {myAccount?.avatar === '' ? (
                               <img
                                 src={ProfileAvatar}
                                 alt={ProfileAvatar}

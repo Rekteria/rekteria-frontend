@@ -170,7 +170,8 @@ const Discussions = ({
                         </span>
                       </Link>
                       <br />
-                      {/* {comment?.account?.avatar ? (
+                      {console.log(comment)}
+                      {comment?.account?.avatar ? (
                         <img
                           src={getImageUrl(comment.account.avatar)}
                           className="profile-image rounded-circle"
@@ -182,7 +183,7 @@ const Discussions = ({
                           className="profile-image rounded-circle"
                           alt=""
                         />
-                      )} */}
+                      )}
                       <br />
                       Location: {comment?.account.location}
                       <br />
