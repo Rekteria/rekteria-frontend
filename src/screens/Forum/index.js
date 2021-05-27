@@ -304,7 +304,7 @@ const Forum = ({
                             <div className="col-8 col-md-3 hidden-md-down">
                               <div className="p-3 p-md-3">
                                 <div className="d-flex align-items-center">
-                                  <div className="d-inline-block align-middle status status-success status-sm mr-2">
+                                  <div className="d-inline-block align-middle status-success status-sm mr-2">
                                     <img
                                       src={noneAvatar}
                                       className="profile-image-md rounded-circle d-block"

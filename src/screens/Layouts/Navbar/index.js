@@ -117,7 +117,7 @@ const Menu = ({ mobile }) => {
                 >
                   {account ? 'My Account' : 'Create Account'}
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/forgot">
                   Account Lost?
                 </Link>
                 <Link className="dropdown-item" to="#">

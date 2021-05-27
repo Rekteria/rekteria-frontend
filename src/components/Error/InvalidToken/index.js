@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Container from '../../../screens/Layouts/Container';
 
-import { GiWolfHowl } from 'react-icons/gi';
+import { BiErrorAlt } from 'react-icons/bi';
 
 const InvalidToken = () => {
   return (
@@ -13,7 +13,10 @@ const InvalidToken = () => {
           id="demo-alert"
         >
           <h1 className="fs-xxl fw-700 color-fusion-500 d-flex align-items-center justify-content-center m-0">
-            <GiWolfHowl className="profile-image-sm rounded-circle bg-danger-700 mr-1 p-1" />
+            <BiErrorAlt
+              size={30}
+              className="profile-image-sm rounded-circle bg-danger-700 mr-1 p-1"
+            />
             <span className="color-danger-700">Invalid Token</span>
           </h1>
           <h3 className="fw-500 mb-0 mt-3">
@@ -26,7 +29,7 @@ const InvalidToken = () => {
           <div className="mt-4">
             <Link
               to="/"
-              className="btn btn-outline-default bg-fusion-800 waves-effect waves-themed"
+              className="btn btn-outline-default bg-fusion-800 waves-effect waves-themed mr-2"
             >
               <span className="fw-700">Cancel</span>
             </Link>

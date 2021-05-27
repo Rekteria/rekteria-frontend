@@ -70,8 +70,6 @@ const Discussions = ({
     });
   };
 
-  console.log(discussionPost);
-
   return (
     <Container>
       <div className="row">
@@ -168,11 +166,11 @@ const Discussions = ({
                         to={`/character/${comment.character_name}`}
                       >
                         <span className="subheader-title text-truncate text-truncate-lg text-primary">
-                          {comment.character_name}
+                          {comment?.account?.profileName}
                         </span>
                       </Link>
                       <br />
-                      {comment?.account?.avatar ? (
+                      {/* {comment?.account?.avatar ? (
                         <img
                           src={getImageUrl(comment.account.avatar)}
                           className="profile-image rounded-circle"
@@ -184,8 +182,7 @@ const Discussions = ({
                           className="profile-image rounded-circle"
                           alt=""
                         />
-                      )}
-                      {console.log(comment)}
+                      )} */}
                       <br />
                       Location: {comment?.account.location}
                       <br />

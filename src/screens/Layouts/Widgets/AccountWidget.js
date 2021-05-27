@@ -151,7 +151,7 @@ const AccountWidget = ({ account }) => {
                   {loading ? 'Loading... ' : 'Login'}
                 </button> */}
                 <Button
-                  className="btn btn-info btn-block btn-lg waves-effect waves-themed mb-2"
+                  className="btn btn-info btn-block btn-lg waves-effect waves-themed mb-1 mt-3"
                   type="submit"
                   disabled={loading ? true : false}
                 >
