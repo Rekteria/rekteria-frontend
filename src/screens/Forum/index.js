@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import {
   forumList,
@@ -34,6 +34,7 @@ const Forum = ({
   mobile,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { account } = useSelector((state) => state.account);
 
   const [categoryLists, setCategoryLists] = React.useState([]);
@@ -48,6 +49,11 @@ const Forum = ({
 
   React.useEffect(() => {
     showLoader();
+
+    if (account?.profileName === '' || account?.profileName === null) {
+      history.push('/account/profile_name');
+    }
+
     forumList().then(({ payload }) => {
       const newData = payload.data.data;
       setCategoryLists(newData);

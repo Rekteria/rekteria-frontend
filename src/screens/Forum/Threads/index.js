@@ -8,6 +8,7 @@ import {
 } from '../../../actions/ForumActions';
 import { formatDate } from '../../../helpers/DateTime';
 import { getAccount } from '../../../helpers/Account';
+import { getImageUrl } from '../../../helpers/Api';
 import noneAvatar from '../../../assets/img/none_avatar.png';
 import CreateThread from '../Threads/Create';
 
@@ -29,7 +30,6 @@ const Threads = ({
 }) => {
   const account = getAccount();
   const { board_id } = useParams();
-
   const [threadList, setThreadList] = React.useState([]);
   const [postInteraction, setPostInteraction] = React.useState(false);
   const [loader, showLoader, hideLoader] = useFullPageLoader();
@@ -49,6 +49,7 @@ const Threads = ({
       .catch((err) => {
         console.log(err);
       });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumBoard, board_id, postInteraction]);
 
@@ -171,7 +172,7 @@ const Threads = ({
                                 <img
                                   src={`${
                                     thread.account.avatar
-                                      ? `https://api.rekteria.net/${thread.account.avatar}`
+                                      ? getImageUrl(thread.account.avatar)
                                       : `${noneAvatar}`
                                   }`}
                                   alt="None Avatar"
