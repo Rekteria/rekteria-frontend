@@ -12,6 +12,7 @@ import noneAvatar from '../../../assets/img/none_avatar.png';
 import CreateThread from '../Threads/Create';
 
 import { showNewThread } from '../../../assets/js/scripts';
+import useFullPageLoader from '../../../Hooks/useFullPageLoader';
 
 import Navbar from '../../Layouts/Navbar';
 import Topbar from '../../Layouts/Topbar';
@@ -27,24 +28,28 @@ const Threads = ({
   mobile,
 }) => {
   const account = getAccount();
+  const { board_id } = useParams();
 
   const [threadList, setThreadList] = React.useState([]);
   const [postInteraction, setPostInteraction] = React.useState(false);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
-  const { board_id } = useParams();
   function interaction() {
     setPostInteraction(!postInteraction);
   }
 
   React.useEffect(() => {
+    showLoader();
     forumBoard(board_id)
       .then(({ payload }) => {
         const newData = payload.data.data;
         setThreadList(newData);
+        hideLoader();
       })
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumBoard, board_id, postInteraction]);
 
   const cancelDelete = (e) => setThreadToRemove(null);
@@ -232,8 +237,8 @@ const Threads = ({
           </div>
         </div>
       </div>
-
       <Footer />
+      {loader}
     </>
   );
 };

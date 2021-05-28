@@ -13,6 +13,8 @@ import InvalidToken from '../../components/Error/InvalidToken';
 import noneAvatar from '../../assets/img/none_avatar.png';
 import { formatDate } from '../../helpers/DateTime';
 
+import useFullPageLoader from '../../Hooks/useFullPageLoader';
+
 import Navbar from '../Layouts/Navbar';
 import Topbar from '../Layouts/Topbar';
 import Footer from '../Layouts/Footer';
@@ -38,17 +40,20 @@ const Forum = ({
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [postInteraction, setPostInteraction] = React.useState(false);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   function interaction() {
     setPostInteraction(!postInteraction);
   }
 
   React.useEffect(() => {
+    showLoader();
     forumList().then(({ payload }) => {
       const newData = payload.data.data;
-
       setCategoryLists(newData);
+      hideLoader();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumList, postInteraction]);
 
   if (!getToken()) {
@@ -365,8 +370,8 @@ const Forum = ({
           </div>
         </div>
       </div>
-
       <Footer />
+      {loader}
     </>
   );
 };

@@ -11,9 +11,10 @@ import {
   signOut,
 } from '../../../actions/AccountActions';
 import { playerList } from '../../../actions/PlayerActions';
+import useFullPageLoader from '../../../Hooks/useFullPageLoader';
+
 import ProfileAvatar from '../../../assets/img/Profile_Avatar.png';
 
-// import { getPlayerName } from '../../../helpers/Account';
 import { convertTimestempToDate } from '../../../helpers/DateTime';
 import Container from '../../Layouts/Container';
 import PaymentHistory from '../PaymentHistory';
@@ -31,7 +32,10 @@ const MyAccount = ({
   const [myAccount, setMyAccount] = React.useState([]);
   const history = useHistory();
 
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
+
   React.useEffect(() => {
+    showLoader();
     playerList();
     getProfileAvatar().then(({ payload }) => {
       const newData = payload.data.data;
@@ -40,14 +44,18 @@ const MyAccount = ({
     getAccount().then(({ payload }) => {
       const newData = payload.data.data;
       setMyAccount(newData);
+      hideLoader();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerList, getProfileAvatar, getAccount]);
 
   React.useEffect(() => {
     getAccount().then(({ payload }) => {
       const newData = payload.data.data;
       setMyAccount(newData);
+      hideLoader();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getAccount]);
 
   if (!avatar) {
@@ -417,6 +425,7 @@ const MyAccount = ({
         </div>
       </div>
       <ToastContainer />
+      {loader}
     </Container>
   );
 };

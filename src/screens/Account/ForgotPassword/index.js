@@ -1,11 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { getFormData } from '../../../helpers/FormData';
 import { forgotPassword } from '../../../actions/AccountActions';
 import Container from '../../Layouts/Container';
 
-import { GiWolfHowl } from 'react-icons/gi';
 import Background from '../../../assets/img/backgrounds/pattern-1.svg';
 
 import Error from '../../../helpers/Error';

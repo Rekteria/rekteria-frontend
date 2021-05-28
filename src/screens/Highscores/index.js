@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { highscoresList } from '../../actions/PlayerActions';
 import { listSkills, characterVocations } from '../../config';
+import useFullPageLoader from '../../Hooks/useFullPageLoader';
 
 import Navbar from '../Layouts/Navbar';
 import Topbar from '../Layouts/Topbar';
@@ -17,8 +18,10 @@ const Highscores = ({ highscoresList, mobile }) => {
   const [skillsName, setSkillsName] = useState('Level');
   const [pageInitial, setPageInitial] = useState(0);
   const [characterPerPage] = useState(10);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   useEffect(() => {
+    showLoader();
     highscoresList({
       vocation: filterVocation,
       skill: filterSkill,
@@ -27,11 +30,12 @@ const Highscores = ({ highscoresList, mobile }) => {
       .then(({ payload }) => {
         const newData = payload.data.data;
         setPlayerList(newData);
+        hideLoader();
       })
       .catch((err) => {
-        alert('os players não foram carregados.');
-        console.log(err);
+        console.log(`😱 Request Api failed: ${err}`);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highscoresList, filterVocation, filterSkill, pageInitial]);
 
   function onValueChangeVocation(e) {
@@ -271,8 +275,8 @@ const Highscores = ({ highscoresList, mobile }) => {
           {/* MAIN CONTENT END */}
         </div>
       </div>
-
       <Footer />
+      {loader}
     </>
   );
 };

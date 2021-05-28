@@ -13,8 +13,8 @@ import { formatDate, convertTimestempToDate } from '../../../helpers/DateTime';
 import { getFormData } from '../../../helpers/FormData';
 import Container from '../../Layouts/Container';
 import { BsReply } from 'react-icons/bs';
-
 import noneAvatar from '../../../assets/img/none_avatar.png';
+import useFullPageLoader from '../../../Hooks/useFullPageLoader';
 
 import JoditEditor from 'jodit-react';
 
@@ -31,15 +31,18 @@ const Discussions = ({
   const [postInteraction, setPostInteraction] = React.useState(false);
   const [editingPost, setEditingPost] = React.useState([]);
   const { board_id, discussion } = useParams();
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   function interaction() {
     setPostInteraction(!postInteraction);
   }
 
   React.useEffect(() => {
+    showLoader();
     getComments(board_id, discussion).then(({ payload }) => {
       const newData = payload.data.data;
       setComments(newData);
+      hideLoader();
     });
     editPost(discussion).then(({ payload }) => {
       const newData = payload.data.data;
@@ -53,6 +56,7 @@ const Discussions = ({
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     forumDiscussion,
     editPost,
@@ -130,7 +134,6 @@ const Discussions = ({
                   dangerouslySetInnerHTML={{ __html: discussionPost.body_text }}
                 />
               </div>
-
               <br />
             </div>
           </div>
@@ -170,7 +173,6 @@ const Discussions = ({
                         </span>
                       </Link>
                       <br />
-                      {console.log(comment)}
                       {comment?.account?.avatar ? (
                         <img
                           src={getImageUrl(comment.account.avatar)}
@@ -200,13 +202,7 @@ const Discussions = ({
                       }}
                     />
                   </div>
-
                   <br />
-                  <div className="row">
-                    {/* <div className="col-md-2">Administrador// IMG LATER</div> */}
-                    <div className="col-md-4"></div>
-                    <div className="col-md-6" align="right"></div>
-                  </div>
                 </div>
               </div>
             );
@@ -266,6 +262,7 @@ const Discussions = ({
           </form>
         </div>
       </div>
+      {loader}
     </Container>
   );
 };
