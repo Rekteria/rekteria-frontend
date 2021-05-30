@@ -37,6 +37,7 @@
 }
 
 .highscore-filter-box {
+  margin: 5px;
   padding: 5px;
   border-radius: 0.2rem;
   background-color: #216669;
@@ -45,9 +46,17 @@
 }
 
 .highscore-filter-text {
+  margin: 5px;
   padding: 5px;
   text-align: center;
 }
+
+.highscore-filter-text:hover {
+  border-radius: 0.2rem;
+  background-color: #216669;
+  color: #fff;
+}
+
 
 .highscore-header {
   background-color: #216669;
