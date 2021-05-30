@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { highscoresList } from '../../actions/PlayerActions';
 import { listSkills, characterVocations } from '../../config';
+import useFullPageLoader from '../../Hooks/useFullPageLoader';
 
 import Navbar from '../Layouts/Navbar';
 import Topbar from '../Layouts/Topbar';
@@ -17,8 +18,29 @@ const Highscores = ({ highscoresList, mobile }) => {
   const [skillsName, setSkillsName] = useState('Level');
   const [pageInitial, setPageInitial] = useState(0);
   const [characterPerPage] = useState(10);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
+  const [vocations] = useState([
+    { name: 'All Vocations', filter: 'all' },
+    { name: 'Rooker', filter: '0' },
+    { name: 'Sorcerer', filter: '1' },
+    { name: 'Druid', filter: '2' },
+    { name: 'Paladin', filter: '3' },
+    { name: 'Knight', filter: '4' }
+  ]);
+  const [skills] = useState([
+    { name: 'level', filter: 'level' },
+    { name: 'Distance Fighting', filter: 'skill_dist' },
+    { name: 'Magic Level', filter: 'maglevel' },
+    { name: 'Sword Fighting', filter: 'skill_sword' },
+    { name: 'Axe Fighting', filter: 'skill_axe' },
+    { name: 'Club Fighting', filter: 'skill_club' },
+    { name: 'Shielding', filter: 'skill_shielding' },
+    { name: 'Fist Fighting', filter: 'skill_fist' },
+    { name: 'Fishing', filter: 'skill_fishing' }
+  ])
 
   useEffect(() => {
+    showLoader();
     highscoresList({
       vocation: filterVocation,
       skill: filterSkill,
@@ -27,28 +49,26 @@ const Highscores = ({ highscoresList, mobile }) => {
       .then(({ payload }) => {
         const newData = payload.data.data;
         setPlayerList(newData);
+        hideLoader();
       })
       .catch((err) => {
-        alert('os players não foram carregados.');
-        console.log(err);
+        console.log(`😱 Request Api failed: ${err}`);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highscoresList, filterVocation, filterSkill, pageInitial]);
 
   function onValueChangeVocation(e) {
-    const options = e.target.value;
-    setFilterVocation(options);
+    setFilterVocation(e);
   }
 
   function onValueChangeSkill(e) {
-    const options = e.target.value;
-
     listSkills.forEach(({ type, name }) => {
-      if (type === options) {
+      if (type === e) {
         setSkillsName(name);
       }
     });
 
-    setFilterSkill(options);
+    setFilterSkill(e);
   }
 
   return (
@@ -64,215 +84,118 @@ const Highscores = ({ highscoresList, mobile }) => {
         <div className="content-border">
           <div className="row">
             {/* MAIN CONTENT START */}
-
-            <div className="col-md-4 col-sm-12 panel panel-default m-3">
-              <form>
-                <select
-                  className="form-control mb-4 mt-3"
-                  onChange={onValueChangeVocation}
-                >
-                  <option value="all">All vocations</option>
-                  <option value="0">Rooker</option>
-                  <option value="1">Sorcerer</option>
-                  <option value="2">Druid</option>
-                  <option value="3">Paladin</option>
-                  <option value="4">Knight</option>
-                </select>
-
-                <div className="funkyradio">
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="level"
-                      value="level"
-                      checked={filterSkill === 'level'}
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="level">Experience</label>
+            <div className="container">
+              <div className="col-lg-12 col-md-12 col-sm-12 highscore-panel">
+                <div className="row">
+                  <div className="col-lg-12 col-md-12 col-sm-12 font-weight-bold p-2 highscore-header">Highscores Filter</div>
+                  <div className="col-md-12 col-sm-12 panel highscores-filter">
+                    {vocations.map((voc, index) => (
+                      <div className={`col-lg-2 col-md-3 col-sm-4 ${filterVocation === voc.filter ? 'highscore-filter-box' : 'highscore-filter-text'}`} key={index} onClick={() => onValueChangeVocation(voc.filter)}>{voc.name}</div>
+                    ))}
                   </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="dist"
-                      value="skill_dist"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="dist">Distance</label>
-                  </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="magic"
-                      value="maglevel"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="magic">Magic Level</label>
-                  </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="sword"
-                      value="skill_sword"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="sword">Sword Fighting</label>
-                  </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="axe"
-                      value="skill_axe"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="axe">Axe Fighting</label>
-                  </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="club"
-                      value="skill_club"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="club">Club Fighting</label>
-                  </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="shield"
-                      value="skill_shielding"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="shield">Shielding</label>
-                  </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="fist"
-                      value="skill_fist"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="fist">Fist Fighting</label>
-                  </div>
-
-                  <div className="funkyradio-primary">
-                    <input
-                      type="radio"
-                      name="radio"
-                      id="fishing"
-                      value="skill_fishing"
-                      onChange={onValueChangeSkill}
-                    />
-                    <label htmlFor="fishing">Fishing Fighting</label>
+                  <div className="col-md-12 col-sm-12 panel highscores-filter">
+                    {skills.map((skill, index) => (
+                      <div className={`col-lg-2 col-md-3 col-sm-4 ${filterSkill === skill.filter ? 'highscore-filter-box' : 'highscore-filter-text'}`} key={index} onClick={() => onValueChangeSkill(skill.filter)}>
+                        {skill.name}
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </form>
-            </div>
-
-            <div className="col-md-7 col-sm-12 panel panel-default mt-3">
-              <h4 className="font-weight-bold p-2">Highscores</h4>
-              <div className="row">
-                <table className="table table-striped table-highscores">
-                  <thead>
-                    <tr>
-                      <th width="1%">Rank</th>
-                      <th width="6%">Name</th>
-                      <th width="5%">{skillsName}</th>
-                      <th width="8%">Vocation</th>
-                    </tr>
-
-                    {playerList.map((props, index) => {
-                      const skill =
-                        filterSkill === 'level'
-                          ? props.level
-                          : props[filterSkill];
-                      return (
-                        <tr key={props.id}>
-                          <td>{pageInitial * characterPerPage + index + 1}</td>
-
-                          <td>
-                            <Link to={`/character/${props.name}`}>
-                              {props.name}
-                            </Link>
-                          </td>
-                          <td>{skill}</td>
-
-                          <td>{characterVocations[props.vocation]}</td>
-                        </tr>
-                      );
-                    })}
-                  </thead>
-                </table>
               </div>
-              <div className="row justify-content-center">
-                <ul className="pagination my-4">
-                  {pageInitial <= 0 ? (
-                    <li className="page-item">
-                      <button
-                        className="page-link disabled mr-3"
-                        aria-label="Previous"
-                        onClick={(e) => setPageInitial(pageInitial - 1)}
-                        disabled
-                      >
-                        &#8249;
-                      </button>
-                    </li>
-                  ) : (
-                    <li className="page-item">
-                      <button
-                        className="page-link round mr-3"
-                        aria-label="Previous"
-                        onClick={(e) => setPageInitial(pageInitial - 1)}
-                      >
-                        &#8249;
-                      </button>
-                    </li>
-                  )}
+            </div>
+            <div className="container">
+              <div className="col-lg-12 col-md-12 col-sm-12 highscore-panel">
+                <div className="row">
+                  <div className="col-lg-12 col-md-12 col-sm-12 font-weight-bold p-2 highscore-header">Highscores</div>
+                  <table className="table table-striped table-highscores">
+                    <thead>
+                      <tr>
+                        <th width="1%">Rank</th>
+                        <th width="6%">Name</th>
+                        <th width="5%">{skillsName}</th>
+                        <th width="8%">Vocation</th>
+                        {filterSkill === 'level' && <th width="10%">Experience Points</th>}
+                      </tr>
 
-                  {playerList.length >= 10 ? (
-                    <li className="page-item">
-                      <button
-                        className="page-link"
-                        aria-label="Next"
-                        onClick={() => setPageInitial(pageInitial + 1)}
-                      >
-                        &#8250;
+                      {playerList.map((props, index) => {
+                        const skill =
+                          filterSkill === 'level'
+                            ? props.level
+                            : props[filterSkill];
+                        return (
+                          <tr key={props.id} className={index % 2 !== 0 ? 'highscores-tr-odd' : ''}>
+                            <td>{pageInitial * characterPerPage + index + 1}</td>
+
+                            <td style={{ fontWeight: 'bold' }}>
+                              <Link to={`/character/${props.name}`}>
+                                {props.name}
+                              </Link>
+                            </td>
+                            <td>{skill}</td>
+                            <td>{characterVocations[props.vocation]}</td>
+                            {filterSkill === 'level' && <td>{props.experience.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>}
+                          </tr>
+                        );
+                      })}
+                    </thead>
+                  </table>
+                </div>
+                <div className="row justify-content-center">
+                  <ul className="pagination my-4">
+                    {pageInitial <= 0 ? (
+                      <li className="page-item">
+                        <button
+                          className="page-link disabled mr-3"
+                          aria-label="Previous"
+                          onClick={(e) => setPageInitial(pageInitial - 1)}
+                          disabled
+                        >
+                          &#8249;
                       </button>
-                    </li>
-                  ) : (
-                    <li className="page-item">
-                      <button
-                        className="page-link disabled"
-                        disabled
-                        onClick={() => setPageInitial(pageInitial + 1)}
-                      >
-                        &#8250;
+                      </li>
+                    ) : (
+                      <li className="page-item">
+                        <button
+                          className="page-link round mr-3"
+                          aria-label="Previous"
+                          onClick={(e) => setPageInitial(pageInitial - 1)}
+                        >
+                          &#8249;
                       </button>
-                    </li>
-                  )}
-                </ul>
+                      </li>
+                    )}
+
+                    {playerList.length >= 10 ? (
+                      <li className="page-item">
+                        <button
+                          className="page-link"
+                          aria-label="Next"
+                          onClick={() => setPageInitial(pageInitial + 1)}
+                        >
+                          &#8250;
+                      </button>
+                      </li>
+                    ) : (
+                      <li className="page-item">
+                        <button
+                          className="page-link disabled"
+                          disabled
+                          onClick={() => setPageInitial(pageInitial + 1)}
+                        >
+                          &#8250;
+                      </button>
+                      </li>
+                    )}
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
           {/* MAIN CONTENT END */}
         </div>
       </div>
-
       <Footer />
+      {loader}
     </>
   );
 };

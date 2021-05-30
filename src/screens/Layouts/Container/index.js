@@ -39,7 +39,6 @@ const Container = ({ children }) => {
               <div className="col-sm-9 pr-0">{children}</div>
               {/* MAIN CONTENT END */}
               <div className="col-sm-3 hidden-xs">
-                {/* {!account && <AccountWidget />} */}
                 <AccountWidget account={account} />
                 <ComingEventsWidget />
                 <BuyCharacterWidget />

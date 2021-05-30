@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { playerGetCharacter } from '../../actions/PlayerActions';
+import useFullPageLoader from '../../Hooks/useFullPageLoader';
 
 // import Outfiter from '../../helpers/Outfiter';
 
@@ -35,7 +36,10 @@ const Character = ({ playerGetCharacter }) => {
   // const [playerItems, setPlayerItems] = React.useState([]);
   // const [stateItems, setStateItems] = React.useState(arrItems);
 
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
+
   React.useEffect(() => {
+    showLoader();
     playerGetCharacter(name)
       .then(({ payload }) => {
         /* data players */
@@ -54,10 +58,12 @@ const Character = ({ playerGetCharacter }) => {
 
         // const playerItems = payload.data.data.rows[0].player_items;
         // setPlayerItems(playerItems);
+        hideLoader();
       })
       .catch((err) => {
         history.push('/PageSearch');
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [name, history, playerGetCharacter]);
 
   // const meleeArray = [
@@ -114,6 +120,7 @@ const Character = ({ playerGetCharacter }) => {
           </div>
         </div>
       </div>
+      {loader}
     </Container>
   );
 };

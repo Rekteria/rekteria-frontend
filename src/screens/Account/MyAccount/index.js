@@ -11,10 +11,11 @@ import {
   signOut,
 } from '../../../actions/AccountActions';
 import { playerList } from '../../../actions/PlayerActions';
+import useFullPageLoader from '../../../Hooks/useFullPageLoader';
+
 import ProfileAvatar from '../../../assets/img/Profile_Avatar.png';
 
-// import { getPlayerName } from '../../../helpers/Account';
-import { convertTimestempToDate } from '../../../helpers/DateTime';
+import { formatDate } from '../../../helpers/DateTime';
 import Container from '../../Layouts/Container';
 import PaymentHistory from '../PaymentHistory';
 import './styles.css';
@@ -31,7 +32,10 @@ const MyAccount = ({
   const [myAccount, setMyAccount] = React.useState([]);
   const history = useHistory();
 
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
+
   React.useEffect(() => {
+    showLoader();
     playerList();
     getProfileAvatar().then(({ payload }) => {
       const newData = payload.data.data;
@@ -40,22 +44,17 @@ const MyAccount = ({
     getAccount().then(({ payload }) => {
       const newData = payload.data.data;
       setMyAccount(newData);
+      hideLoader();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerList, getProfileAvatar, getAccount]);
-
-  React.useEffect(() => {
-    getAccount().then(({ payload }) => {
-      const newData = payload.data.data;
-      setMyAccount(newData);
-    });
-  }, [getAccount]);
 
   if (!avatar) {
     return null;
   }
 
   if (!account) {
-    return <Redirect to="/sign-in" />;
+    return <Redirect to="/" />;
   }
 
   const signOutHandler = (event) => {
@@ -155,7 +154,7 @@ const MyAccount = ({
                             <tr>
                               <td>Created</td>
                               <td className="col-md-9">
-                                {convertTimestempToDate(myAccount.creation)}
+                                {formatDate(myAccount.creation)}
                               </td>
                               <td></td>
                             </tr>
@@ -257,7 +256,8 @@ const MyAccount = ({
                                 </h2>
                               </div>
                             </div>
-                            {myAccount.avatar === '' ? (
+                            {myAccount?.avatar === '' ||
+                            myAccount?.avatar === null ? (
                               <img
                                 src={ProfileAvatar}
                                 alt={ProfileAvatar}
@@ -283,7 +283,6 @@ const MyAccount = ({
                                 </div>
                               </div>
                             )}
-
                             <div
                               className="modal fade example-modal-centered-transparent"
                               id="newCategory"
@@ -339,11 +338,10 @@ const MyAccount = ({
                                 </div>
                               </div>
                             </div>
-
                             <br />
                             <br />
 
-                            {avatar && avatar?.length > 0 ? (
+                            {avatar && avatar === null ? (
                               <button
                                 className="btn btn-primary btn-sm disabled"
                                 align="center"
@@ -417,6 +415,7 @@ const MyAccount = ({
         </div>
       </div>
       <ToastContainer />
+      {loader}
     </Container>
   );
 };

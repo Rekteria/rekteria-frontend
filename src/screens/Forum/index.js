@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import {
   forumList,
@@ -12,6 +12,8 @@ import { getToken } from '../../helpers/Account';
 import InvalidToken from '../../components/Error/InvalidToken';
 import noneAvatar from '../../assets/img/none_avatar.png';
 import { formatDate } from '../../helpers/DateTime';
+
+import useFullPageLoader from '../../Hooks/useFullPageLoader';
 
 import Navbar from '../Layouts/Navbar';
 import Topbar from '../Layouts/Topbar';
@@ -32,23 +34,32 @@ const Forum = ({
   mobile,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { account } = useSelector((state) => state.account);
 
   const [categoryLists, setCategoryLists] = React.useState([]);
   const [title, setTitle] = React.useState('');
   const [description, setDescription] = React.useState('');
   const [postInteraction, setPostInteraction] = React.useState(false);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   function interaction() {
     setPostInteraction(!postInteraction);
   }
 
   React.useEffect(() => {
+    showLoader();
+
+    if (account?.profileName === '' || account?.profileName === null) {
+      history.push('/account/profile_name');
+    }
+
     forumList().then(({ payload }) => {
       const newData = payload.data.data;
-
       setCategoryLists(newData);
+      hideLoader();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumList, postInteraction]);
 
   if (!getToken()) {
@@ -304,7 +315,7 @@ const Forum = ({
                             <div className="col-8 col-md-3 hidden-md-down">
                               <div className="p-3 p-md-3">
                                 <div className="d-flex align-items-center">
-                                  <div className="d-inline-block align-middle status status-success status-sm mr-2">
+                                  <div className="d-inline-block align-middle status-success status-sm mr-2">
                                     <img
                                       src={noneAvatar}
                                       className="profile-image-md rounded-circle d-block"
@@ -365,8 +376,8 @@ const Forum = ({
           </div>
         </div>
       </div>
-
       <Footer />
+      {loader}
     </>
   );
 };

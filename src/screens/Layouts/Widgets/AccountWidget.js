@@ -7,6 +7,7 @@ import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 
 import { signIn } from '../../../actions/AccountActions';
+import { getImageUrl } from '../../../helpers/Api';
 
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -68,7 +69,9 @@ const AccountWidget = ({ account }) => {
                 <div className="row no-gutters row-grid">
                   <div className="col-12">
                     <div className="d-flex flex-column align-items-center justify-content-center p-4">
-                      {account.avatar === '' ? (
+                      {account.avatar === '' ||
+                      account.avatar === null ||
+                      account.avatar === undefined ? (
                         <img
                           src={ProfileAvatar}
                           alt={ProfileAvatar}
@@ -81,7 +84,7 @@ const AccountWidget = ({ account }) => {
                       ) : (
                         <div className="imagem-avatar">
                           <img
-                            src={`https://api.rekteria.net/${account.avatar}`}
+                            src={getImageUrl(account.avatar)}
                             alt="Avatar"
                             className="profile-image-lg rounded-circle"
                           />
@@ -89,10 +92,21 @@ const AccountWidget = ({ account }) => {
                       )}
                       <h5 className="mb-0 fw-700 text-center mt-3">
                         <span className="subheader-title text-truncate text-truncate-lg text-primary mr-2">
-                          {account?.profileName},
+                          {account?.profileName === '' ||
+                          account?.profileName === null ? (
+                            <Link to="/account/profile_name">Set Profile</Link>
+                          ) : (
+                            account?.profileName
+                          )}
+                          ,
                         </span>
                         <small className="text-muted mb-0">
-                          {account?.location}
+                          {account?.location === '' ||
+                          account?.location === null ? (
+                            <Link to="/account/profile">Set Location</Link>
+                          ) : (
+                            account?.location
+                          )}
                         </small>
                       </h5>
                     </div>
@@ -151,7 +165,7 @@ const AccountWidget = ({ account }) => {
                   {loading ? 'Loading... ' : 'Login'}
                 </button> */}
                 <Button
-                  className="btn btn-info btn-block btn-lg waves-effect waves-themed mb-2"
+                  className="btn btn-info btn-block btn-lg waves-effect waves-themed mb-1 mt-3"
                   type="submit"
                   disabled={loading ? true : false}
                 >

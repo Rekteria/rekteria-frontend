@@ -1,18 +1,18 @@
 .table-highscores {
   width: 100%;
-  max-width: 900px;
   padding: 8px 16px;
   border-collapse: separate;
-  border-spacing: 0 1em;
-  border: 1px solid #ccc;
+  font-size: 1.5vw;
 }
 
 .table-highscores tr td {
-  padding: 10px;
+  padding: 5px;
 }
 
 .table-highscores th {
-  font-size: 16px;
+  background-color: rgba(33, 102, 105, 0.20);
+  font-size: 1vw;
+  font-weight: bold;
 }
 
 .table-highscores tr {
@@ -21,6 +21,57 @@
 
 .table-highscores tr:hover {
   cursor: pointer;
+}
+
+.highscores-tr-odd {
+  background-color: rgba(33, 102, 105, 0.20);
+}
+
+.highscores-filter {
+  display: flex;
+  cursor: pointer;
+  flex-wrap: wrap;
+  font-weight: bold;
+  font-size: 1vw;
+  text-align: center;
+}
+
+.highscore-filter-box {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 0.2rem;
+  background-color: #216669;
+  color: #fff;
+  text-align: center;
+}
+
+.highscore-filter-text {
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+}
+
+.highscore-filter-text:hover {
+  border-radius: 0.2rem;
+  background-color: #216669;
+  color: #fff;
+}
+
+
+.highscore-header {
+  background-color: #216669;
+  color: #fff;
+  font-size: 1.5vw;
+  border-radius: 4px;
+}
+
+.highscore-panel {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .previous {

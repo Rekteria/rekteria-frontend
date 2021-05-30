@@ -117,10 +117,10 @@ const Menu = ({ mobile }) => {
                 >
                   {account ? 'My Account' : 'Create Account'}
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/forgot">
                   Account Lost?
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/downloads">
                   Download Client
                 </Link>
               </div>
@@ -137,9 +137,6 @@ const Menu = ({ mobile }) => {
                 Community
               </Link>
               <div className="dropdown-menu">
-                <Link className="dropdown-item" to="#">
-                  Search Character
-                </Link>
                 <Link className="dropdown-item" to="#">
                   Who is online?
                 </Link>

@@ -11,7 +11,6 @@ import './styles.css';
 const PageSearch = () => {
   const { customNameData } = useLocation();
   const { error, name } = customNameData;
-  console.log(error, name); // result: 'some_value'
 
   return (
     <Container>

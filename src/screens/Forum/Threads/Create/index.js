@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { connect } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { forumNewThread } from '../../../../actions/ForumActions';
 import { playerList } from '../../../../actions/PlayerActions';
 import { hideNewThread } from '../../../../assets/js/scripts';
@@ -13,7 +13,6 @@ const CreateThread = ({ forumNewThread, playerList, interaction }) => {
   const account = getAccount();
   const [newThread, setNewThread] = React.useState([]);
   const { board_id } = useParams();
-  const history = useHistory();
 
   React.useEffect(() => {
     playerList().then(({ payload }) => {
@@ -35,10 +34,6 @@ const CreateThread = ({ forumNewThread, playerList, interaction }) => {
         console.error(err);
       });
   };
-
-  if (account?.profileName === '' || account?.profileName === null) {
-    history.push('/account/profile_name');
-  }
 
   return (
     <form onSubmit={subbmitHandle}>

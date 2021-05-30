@@ -319,7 +319,8 @@ a {
 }
 
 .panel {
-  margin-bottom: 20px;
+  max-width: 96%;
+  margin: 20px;
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;
@@ -784,6 +785,23 @@ a {
 .profile-image-sm {
   width: 1.5625rem;
   height: 1.5625rem;
+}
+
+.fp-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #f8f8f8ad;
+}
+.fp-container .fp-loader {
+  left: 50%;
+  top: 50%;
+  margin-left: -100px;
+  margin-top: -50px;
+  z-index: 1000;
+  position: absolute;
 }
 
 /* Small devices (landscape phones, 576px and up) */
