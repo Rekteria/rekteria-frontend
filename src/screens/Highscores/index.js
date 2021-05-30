@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { highscoresList } from '../../actions/PlayerActions';
 import { listSkills, characterVocations } from '../../config';
-import useFullPageLoader from '../../Hooks/useFullPageLoader';
+import { showLoading, hideLoading } from 'react-redux-loading-bar'
 
 import Navbar from '../Layouts/Navbar';
 import Topbar from '../Layouts/Topbar';
@@ -11,14 +11,13 @@ import Footer from '../Layouts/Footer';
 
 import './styles.css';
 
-const Highscores = ({ highscoresList, mobile }) => {
+const Highscores = ({ highscoresList, mobile, showLoading, hideLoading }) => {
   const [playerList, setPlayerList] = useState([]);
   const [filterVocation, setFilterVocation] = useState('all');
   const [filterSkill, setFilterSkill] = useState('level');
   const [skillsName, setSkillsName] = useState('Level');
   const [pageInitial, setPageInitial] = useState(0);
   const [characterPerPage] = useState(10);
-  const [loader, showLoader, hideLoader] = useFullPageLoader();
   const [vocations] = useState([
     { name: 'All Vocations', filter: 'all' },
     { name: 'Rooker', filter: '0' },
@@ -40,7 +39,7 @@ const Highscores = ({ highscoresList, mobile }) => {
   ])
 
   useEffect(() => {
-    showLoader();
+    showLoading()
     highscoresList({
       vocation: filterVocation,
       skill: filterSkill,
@@ -49,10 +48,11 @@ const Highscores = ({ highscoresList, mobile }) => {
       .then(({ payload }) => {
         const newData = payload.data.data;
         setPlayerList(newData);
-        hideLoader();
+        hideLoading()
       })
       .catch((err) => {
         console.log(`😱 Request Api failed: ${err}`);
+        hideLoading()
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [highscoresList, filterVocation, filterSkill, pageInitial]);
@@ -195,7 +195,6 @@ const Highscores = ({ highscoresList, mobile }) => {
         </div>
       </div>
       <Footer />
-      {loader}
     </>
   );
 };
@@ -206,4 +205,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { highscoresList })(Highscores);
+export default connect(mapStateToProps, { highscoresList, showLoading, hideLoading })(Highscores);

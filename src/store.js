@@ -10,6 +10,8 @@ import inventoryReducer from './reducers/InventoryReducer';
 import pagarmeReducer from './reducers/PagarmeReducer';
 import paymentHistoryReducer from './reducers/PaymentHistoryReducer';
 import pixGerenciaReducer from './reducers/PixGerenciaReducer';
+import { loadingBarMiddleware } from 'react-redux-loading-bar'
+import { loadingBarReducer } from 'react-redux-loading-bar'
 
 const reducers = combineReducers({
   account: accountReducer,
@@ -22,8 +24,9 @@ const reducers = combineReducers({
   pagarme: pagarmeReducer,
   paymentHistory: paymentHistoryReducer,
   pixGerencia: pixGerenciaReducer,
+  loadingBar: loadingBarReducer,
 });
 
-const store = createStore(reducers, applyMiddleware(ReduxPromise));
+const store = createStore(reducers, applyMiddleware(ReduxPromise, loadingBarMiddleware()));
 
 export default store;
