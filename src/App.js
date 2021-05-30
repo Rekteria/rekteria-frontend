@@ -27,6 +27,7 @@ import GuildList from './screens/Guilds/GuildList';
 import Online from './screens/Online';
 import Shop from './screens/Shop';
 import BuyCoins from './screens/BuyCoins';
+import LoadingBar from 'react-redux-loading-bar'
 
 import PageSearch from './components/PageSearch';
 import ProtectedRoute from './helpers/ProtectedRoute';
@@ -48,6 +49,7 @@ const App = ({ initAccount }) => {
   return (
     <>
       <BrowserRouter>
+        <LoadingBar style={{ backgroundColor: '#216669' }} />
         <Switch>
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/forgot" component={ForgotPassword} />
