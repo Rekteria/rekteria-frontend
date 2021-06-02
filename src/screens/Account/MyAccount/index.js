@@ -1,7 +1,7 @@
 import React from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import {
@@ -21,7 +21,6 @@ import PaymentHistory from '../PaymentHistory';
 import './styles.css';
 
 const MyAccount = ({
-  players,
   playerList,
   getProfileAvatar,
   getAccount,
@@ -30,28 +29,27 @@ const MyAccount = ({
   showLoading,
   hideLoading,
 }) => {
-  const [avatar, setAvatar] = React.useState('');
+  const dispatch = useDispatch();
+  const { player } = useSelector((state) => state.player);
   const [myAccount, setMyAccount] = React.useState([]);
+
   const history = useHistory();
 
   React.useEffect(() => {
     showLoading();
-    playerList();
-    getProfileAvatar().then(({ payload }) => {
-      const newData = payload.data.data;
-      setAvatar(newData);
-    });
-    getAccount().then(({ payload }) => {
-      const newData = payload.data.data;
-      setMyAccount(newData);
-      hideLoading();
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playerList, getProfileAvatar, getAccount]);
+    dispatch(getAccount())
+      .then(({ payload }) => {
+        const newData = payload.data.data;
+        setMyAccount(newData);
+        hideLoading();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    dispatch(playerList());
 
-  if (!avatar) {
-    return null;
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [getAccount, dispatch]);
 
   if (!account) {
     return <Redirect to="/" />;
@@ -270,7 +268,7 @@ const MyAccount = ({
                             ) : (
                               <div className="imagem-avatar">
                                 <img
-                                  src={avatar}
+                                  src={`https://api.rekteria.net/${myAccount.avatar}`}
                                   alt="Avatar"
                                   className="profile-image rounded-circle"
                                 />
@@ -341,7 +339,7 @@ const MyAccount = ({
                             <br />
                             <br />
 
-                            {avatar && avatar === null ? (
+                            {/* {avatar && avatar === null ? (
                               <button
                                 className="btn btn-primary btn-sm disabled"
                                 align="center"
@@ -358,7 +356,7 @@ const MyAccount = ({
                                   Update Avatar
                                 </button>
                               </Link>
-                            )}
+                            )} */}
                           </div>
                         </div>
                       </div>
@@ -381,8 +379,8 @@ const MyAccount = ({
 
               <div className="panel-body hidden-md hidden-lg">
                 <div className="character-container">
-                  {players && players.length
-                    ? players.map((player) => {
+                  {player && player.length
+                    ? player.map((player) => {
                         return (
                           <div key={player.id} className="new-character">
                             <Link to={`/character/${player.name}`}>
@@ -401,7 +399,7 @@ const MyAccount = ({
                         );
                       })
                     : null}
-                  {players?.length < 5 && (
+                  {player?.length < 5 && (
                     <Link to="/account/characters/create">
                       <span className="new-character">
                         <FiPlus size={24} color="#17a7af" />
