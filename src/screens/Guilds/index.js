@@ -1,6 +1,4 @@
 import React from 'react';
-import { FaThList } from 'react-icons/fa';
-import { RiTableLine } from 'react-icons/ri';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { guildCreate, guildList } from '../../actions/GuildActions';
@@ -9,21 +7,36 @@ import GuildLogoDefault from '../../assets/img/guild_logo_default.png';
 import { getImageUrl } from '../../helpers/Api';
 import { getFormData } from '../../helpers/FormData';
 import Container from '../Layouts/Container';
+import useFullPageLoader from '../../Hooks/useFullPageLoader';
+import Pagination from './Pagination';
+import Search from './Search';
 
 const Guilds = ({ playerList, guildList, players }) => {
   const [guild, setGuild] = React.useState([]);
   const [postInteraction, setPostInteraction] = React.useState(false);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
+
+  const [currentPage, setCurrentPage] = React.useState(1);
+
+  const [search, setSearch] = React.useState('');
+  const [searchBy, setSearchBy] = React.useState('name');
+  const [sortBy] = React.useState('name');
+
+  const guildsPerPage = 10;
 
   function interaction() {
     setPostInteraction(!postInteraction);
   }
 
   React.useEffect(() => {
+    showLoader();
     playerList();
     guildList().then(({ payload }) => {
       const newData = payload.data.data;
       setGuild(newData);
+      hideLoader();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerList, guildList, postInteraction]);
 
   const submitHandler = async (e) => {
@@ -33,24 +46,49 @@ const Guilds = ({ playerList, guildList, players }) => {
     interaction();
   };
 
+  const processDevices = (_devices) => {
+    return _devices
+      .filter((p) => {
+        if (search === '') {
+          return true;
+        }
+        if (!p[searchBy]) {
+          return false;
+        }
+        return p[searchBy]
+          .replace(',', '')
+          .toLowerCase()
+          .includes(search.toLowerCase());
+      })
+      .sort((a, b) => (a[sortBy] > b[sortBy] ? 1 : -1));
+  };
+
+  const handleSearchChange = (event) => setSearch(event.target.value);
+
+  const handleSearchByChange = (event) => setSearchBy(event.target.value);
+
+  const indexOfLastDevice = currentPage * guildsPerPage;
+  const indexOfFirstDevice = indexOfLastDevice - guildsPerPage;
+
+  const handlePageClick = ({ selected }) => {
+    console.log('selected', selected);
+    setCurrentPage(selected + 1);
+  };
+
+  const processedDevices = processDevices(guild);
+  const currentDevices = processedDevices.slice(
+    indexOfFirstDevice,
+    indexOfLastDevice
+  );
+
   return (
     <Container>
-      <div className="row" style={{ marginTop: '11px' }}>
-        <div className="col-xl-12">
-          <div className="border-faded bg-faded p-3 mb-g d-flex">
-            <input
-              type="text"
-              name="filter-guilds"
-              className="form-control shadow-inset-2 form-control-lg"
-              placeholder="Filter Guilds"
-            />
-            <div
-              className="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3"
-              data-toggle="buttons"
-            ></div>
-          </div>
-        </div>
-      </div>
+      <Search
+        handleSearchChange={handleSearchChange}
+        handleSearchByChange={handleSearchByChange}
+        searchBy={searchBy}
+        search={search}
+      />
 
       <div className="text-center mb-3">
         <form onSubmit={submitHandler}>
@@ -106,7 +144,7 @@ const Guilds = ({ playerList, guildList, players }) => {
 
       {/* Guilds List */}
       <div className="row">
-        {guild.map((guilds, index) => (
+        {currentDevices.map((guilds, index) => (
           <div key={guilds.id} className="col-xl-4">
             <div className="card border shadow-0 shadow-sm-hover mb-g">
               <div className="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
@@ -159,6 +197,13 @@ const Guilds = ({ playerList, guildList, players }) => {
           </div>
         ))}
       </div>
+
+      {loader}
+      <Pagination
+        devicesPerPage={guildsPerPage}
+        totalDevices={guild.length}
+        handlePageClick={handlePageClick}
+      />
     </Container>
   );
 };
