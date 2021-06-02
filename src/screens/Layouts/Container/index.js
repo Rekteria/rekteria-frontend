@@ -31,6 +31,8 @@ const Container = ({ children }) => {
     });
   }, [dispatch]);
 
+  // console.log(account);
+
   return (
     <>
       <div className="logo"></div>

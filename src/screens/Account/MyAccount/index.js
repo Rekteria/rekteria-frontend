@@ -412,7 +412,7 @@ const MyAccount = ({
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer className="toast-message" />
     </Container>
   );
 };

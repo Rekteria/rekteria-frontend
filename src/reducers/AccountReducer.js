@@ -22,11 +22,9 @@ import {
   removeAccount,
   removeToken,
   removeRefreshToken,
-  setPlayerName,
-  getPlayerName,
   removePlayerName,
 } from '../helpers/Account';
-import { PLAYER_CREATE } from '../actions/PlayerActions';
+// import { PLAYER_CREATE } from '../actions/PlayerActions';
 import { CREATE_THREAD } from '../actions/ForumActions';
 
 const initialState = {
@@ -41,7 +39,6 @@ export default function (state = initialState, action) {
   switch (type) {
     case SIGN_IN:
     case SIGN_UP:
-    case PLAYER_CREATE:
     case CREATE_THREAD:
     case PROFILE_INFO:
     case CHANGE_PASSWORD:
@@ -54,17 +51,16 @@ export default function (state = initialState, action) {
       const account = response ? response.data : null;
       const metadata = response ? response.metadata : null;
 
-      const player = response ? response?.data?.[0]?.name : null;
-
       const token = metadata ? metadata.token : null;
       const refreshToken = metadata ? metadata.refreshToken : null;
 
+      console.log('AccounReducer', account);
+
       if (account) setAccount(account);
-      if (player) setPlayerName(player);
       if (token) setToken(token);
       if (refreshToken) setRefreshToken(refreshToken);
 
-      return { ...state, account, player };
+      return { ...state, account };
 
     case SIGN_OUT:
       removeAccount();
@@ -72,7 +68,7 @@ export default function (state = initialState, action) {
       removeToken();
       removeRefreshToken();
 
-      return { ...state, account: null, player: null };
+      return { ...state, account: null };
 
     case FORGOT_PASSWORD:
     case RESET_PASSWORD: {
@@ -86,9 +82,8 @@ export default function (state = initialState, action) {
 
     case INIT_ACCOUNT: {
       const account = getAccount();
-      const player = getPlayerName();
 
-      return { ...state, account, player };
+      return { ...state, account };
     }
 
     case REFRESH_TOKEN: {

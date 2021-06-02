@@ -2,8 +2,10 @@ import React from 'react';
 import { FaRegTrashAlt, FaSignInAlt, FaUsers } from 'react-icons/fa';
 import { FiSettings } from 'react-icons/fi';
 import { GiBattleGear } from 'react-icons/gi';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+
 import {
   editGuildDescription,
   editGuildRanks,
@@ -59,6 +61,7 @@ const GuildList = ({
   const [editMember, setEditMember] = React.useState('');
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   function interaction() {
@@ -130,13 +133,31 @@ const GuildList = ({
     e.preventDefault(e);
     const formData = new FormData();
     formData.append('guild_logo', image);
-    postGuildLogo(id, formData);
+    postGuildLogo(id, formData)
+      .then(() => {
+        toast.success('Your Guild Logo has been successfully exchanged..');
+        interaction();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err);
+      });
   };
 
   const submitDescriptionHandler = (e) => {
     e.preventDefault(e);
     const data = getFormData(e);
-    editGuildDescription(id, data);
+    dispatch(editGuildDescription(id, data))
+      .then(() => {
+        toast.success(
+          'Your Guild Description has been successfully exchanged..'
+        );
+        interaction();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err);
+      });
   };
 
   const submitRanksHandler = (e) => {
@@ -148,7 +169,15 @@ const GuildList = ({
       { name: editMember || getRanks[2].name, level: 1, id: getRanks[2].id },
     ];
 
-    editGuildRanks(id, addRanks);
+    editGuildRanks(id, addRanks)
+      .then(() => {
+        toast.success('Your Ranks Name has been successfully exchanged..');
+        interaction();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err);
+      });
   };
 
   const getPlayer = getPlayerInAccount.map((player) => player.id);
@@ -273,9 +302,9 @@ const GuildList = ({
                                     to={`/character/${members.player.name}`}
                                   >
                                     {members.player.name}{' '}
-                                    <span className="fw-300">
+                                    {/* <span className="fw-300">
                                       <i>(Rei do Gesior)</i>
-                                    </span>
+                                    </span> */}
                                   </Link>
                                 </h2>
                               </div>
@@ -531,23 +560,28 @@ const GuildList = ({
           </table>
         </form>
       </div>
-      <form onSubmit={submitHandler}>
-        <div className="d-flex flex-column align-items-center justify-content-center text-center">
-          <div className="row">
-            <div className="col-9 pr-1 mb-3">
-              <input
-                type="text"
-                name="player_id"
-                className="form-control"
-                placeholder="Enter name to invite player."
-              />
-            </div>
-            <div className="col-3 pr-1 mb-3">
-              <button className="btn btn-sm btn-outline-primary">Invite</button>
+      {settings.length > 0 ? (
+        <form onSubmit={submitHandler}>
+          <div className="d-flex flex-column align-items-center justify-content-center text-center">
+            <div className="row">
+              <div className="col-9 pr-1 mb-3">
+                <input
+                  type="text"
+                  name="player_id"
+                  className="form-control"
+                  placeholder="Enter name to invite player."
+                />
+              </div>
+              <div className="col-3 pr-1 mb-3">
+                <button className="btn btn-sm btn-outline-primary">
+                  Invite
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      ) : null}
+      <ToastContainer className="toast-message" />
     </Container>
   );
 };
