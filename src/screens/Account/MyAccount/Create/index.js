@@ -4,7 +4,7 @@ import { Link, Redirect, useHistory } from 'react-router-dom';
 import { playerCreate, playerList } from '../../../../actions/PlayerActions';
 import { toast, ToastContainer } from 'react-toastify';
 import Container from '../../../Layouts/Container';
-import { createVocations } from '../../../../config';
+import { createVocations, towns } from '../../../../config';
 import './styles.css';
 
 const CreateCharacter = ({ playerCreate, playerList, player }) => {
@@ -14,6 +14,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
   const [name, setName] = React.useState('');
   const [sex, setSex] = React.useState('');
   const [vocation, setVocation] = React.useState('');
+  const [town, setTown] = React.useState(0);
 
   React.useEffect(() => {
     playerList();
@@ -26,6 +27,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
       name,
       sex,
       vocation,
+      town,
     };
 
     playerCreate(data)
@@ -56,40 +58,62 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
   return (
     <Container>
       <form onSubmit={submitHandler}>
-        <div className="tab-content py-3">
+        <div className="tab-content">
           <div className="tab-pane fade active show">
             <div className="panel panel-default">
               <div className="panel-heading">Create Character</div>
               <div className="panel-body">
                 <div className="row">
-                  <div className="col-6">
-                    <div className="form-group">
-                      <label className="form-label" htmlFor={name}>
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name={name}
-                        placeholder="Enter your nickname"
-                        onChange={(event) =>
-                          setName(
-                            event.target.value
-                              .toLowerCase()
-                              .split(' ')
-                              .map(
-                                (word) =>
-                                  word.charAt(0).toUpperCase() + word.slice(1)
-                              )
-                              .join(' ')
-                          )
-                        }
-                        required
-                      />
-                      <span className="help-block">
-                        Your unique username to Game.
-                      </span>
-                    </div>
+                  <div className="col">
+                    <table className="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <td>Character Name:</td>
+                          <td>
+                            <input
+                              type="text"
+                              className="form-control"
+                              name={name}
+                              placeholder="Character name"
+                              onChange={(event) =>
+                                setName(
+                                  event.target.value
+                                    .toLowerCase()
+                                    .split(' ')
+                                    .map(
+                                      (word) =>
+                                        word.charAt(0).toUpperCase() +
+                                        word.slice(1)
+                                    )
+                                    .join(' ')
+                                )
+                              }
+                              required
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Town:</td>
+                          <td>
+                            <select
+                              name="selected_gender"
+                              className="form-control width:200px"
+                              onChange={(event) =>
+                                setTown(Number(event.target.value))
+                              }
+                            >
+                              <option value="" selected hidden disabled>
+                                Choose Town
+                              </option>
+                              <option value={8}>{towns[8]}</option>
+                              <option value={6}>{towns[6]}</option>
+                              <option value={9}>{towns[9]}</option>
+                              <option value={7}>{towns[7]}</option>
+                            </select>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
@@ -122,7 +146,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
 
                 <div className="row justify-content-center">
                   {Object.keys(createVocations).map((vocation) => (
-                    <div className="col-auto">
+                    <div className="col-auto" key={vocation}>
                       <label
                         key={createVocations[vocation].vocation_id}
                         htmlFor={createVocations[vocation].vocation_id}
