@@ -11,7 +11,7 @@ import {
   signOut,
 } from '../../../actions/AccountActions';
 import { playerList } from '../../../actions/PlayerActions';
-import useFullPageLoader from '../../../Hooks/useFullPageLoader';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import ProfileAvatar from '../../../assets/img/Profile_Avatar.png';
 
@@ -27,15 +27,15 @@ const MyAccount = ({
   getAccount,
   signOut,
   account,
+  showLoading,
+  hideLoading,
 }) => {
   const [avatar, setAvatar] = React.useState('');
   const [myAccount, setMyAccount] = React.useState([]);
   const history = useHistory();
 
-  const [loader, showLoader, hideLoader] = useFullPageLoader();
-
   React.useEffect(() => {
-    showLoader();
+    showLoading();
     playerList();
     getProfileAvatar().then(({ payload }) => {
       const newData = payload.data.data;
@@ -44,7 +44,7 @@ const MyAccount = ({
     getAccount().then(({ payload }) => {
       const newData = payload.data.data;
       setMyAccount(newData);
-      hideLoader();
+      hideLoading();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playerList, getProfileAvatar, getAccount]);
@@ -415,7 +415,6 @@ const MyAccount = ({
         </div>
       </div>
       <ToastContainer />
-      {loader}
     </Container>
   );
 };
@@ -432,4 +431,6 @@ export default connect(mapStateToProps, {
   signOut,
   getProfileAvatar,
   getAccount,
+  showLoading,
+  hideLoading,
 })(MyAccount);

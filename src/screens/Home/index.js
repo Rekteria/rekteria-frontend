@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { forumBoard } from '../../actions/ForumActions';
 
-import useFullPageLoader from '../../Hooks/useFullPageLoader';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import { getImageUrl } from '../../helpers/Api';
 import { groupsId } from '../../config';
 import { formatDate } from '../../helpers/DateTime';
@@ -17,21 +17,21 @@ import { BiTimeFive } from 'react-icons/bi';
 
 import { Link } from 'react-router-dom';
 
-const Home = ({ forumBoard }) => {
+const Home = ({ forumBoard, showLoading, hideLoading }) => {
   const [newsPost, setNewsPost] = React.useState([]);
   const [isOpened, setIsOpened] = React.useState(false);
-  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   React.useEffect(() => {
-    showLoader();
+    showLoading();
     forumBoard(1)
       .then(({ payload }) => {
         const newData = payload.data.data;
         setNewsPost(newData);
-        hideLoader();
+        hideLoading();
       })
       .catch((err) => {
         console.log(err);
+        hideLoading();
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumBoard]);
@@ -145,7 +145,6 @@ const Home = ({ forumBoard }) => {
           <p>No news exist.</p>
         )}
       </div>
-      {loader}
     </Container>
   );
 };
@@ -156,4 +155,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { forumBoard })(Home);
+export default connect(mapStateToProps, {
+  forumBoard,
+  showLoading,
+  hideLoading,
+})(Home);
