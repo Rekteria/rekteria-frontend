@@ -100,7 +100,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
                         type="radio"
                         className="visible"
                         name="sex"
-                        value="0"
+                        value="1"
                         data-icon=""
                         onChange={(event) => setSex(Number(event.target.value))}
                       />
@@ -112,7 +112,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
                         type="radio"
                         className="visible"
                         name="sex"
-                        value="1"
+                        value="0"
                         data-icon=""
                         onChange={(event) => setSex(Number(event.target.value))}
                       />
