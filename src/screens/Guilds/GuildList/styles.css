@@ -32,8 +32,8 @@
   border-radius: 0.2em;
   position: relative;
   background: white;
-  background: linear-gradient(to right, #574577, #525186);
-  color: #bdafd1;
+  background: linear-gradient(to right, #2d797d, #52aeb3);
+  color: white;
   transform: skewX(-10deg);
   display: inline-block;
   top: 10rem;

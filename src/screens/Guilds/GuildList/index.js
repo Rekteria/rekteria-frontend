@@ -1,5 +1,7 @@
 import React from 'react';
-import { FaSignInAlt, FaRegTrashAlt } from 'react-icons/fa';
+import { FaRegTrashAlt, FaSignInAlt, FaUsers } from 'react-icons/fa';
+import { FiSettings } from 'react-icons/fi';
+import { GiBattleGear } from 'react-icons/gi';
 import { connect } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import {
@@ -15,18 +17,15 @@ import {
   postGuildLogo,
   setGuildToRemove,
 } from '../../../actions/GuildActions';
-
 import { playerList } from '../../../actions/PlayerActions';
 import GuildLogoDefault from '../../../assets/img/guild_logo_default.png';
 import { characterVocations } from '../../../config';
 import { getImageUrl } from '../../../helpers/Api';
 import { getFormData } from '../../../helpers/FormData';
-
 import Container from '../../Layouts/Container';
 import ChangeLogo from './ChangeLogo';
 import GuildDescription from './GuildDescription';
 import GuildRank from './GuildRank';
-
 import './styles.css';
 
 const GuildList = ({
@@ -219,18 +218,19 @@ const GuildList = ({
                   data-toggle="tab"
                   href="#members"
                 >
-                  <i className="fal fa-user mr-1"></i>Members
+                  <FaUsers className="mr-1" size={20} />
+                  Members
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" data-toggle="tab" href="#wars">
-                  <i className="fal fa-chart-bar mr-1"></i>Active Wars
+                  <GiBattleGear className="mr-1" size={20} /> Active Wars
                 </a>
               </li>
               {settings.length > 0 ? (
                 <li className="nav-item">
                   <a className="nav-link" data-toggle="tab" href="#settings">
-                    <i className="fal fa-cog text-danger mr-1" />
+                    <FiSettings className="mr-1" size={20} />
                     Settings
                   </a>
                 </li>
@@ -316,7 +316,6 @@ const GuildList = ({
                             aria-controls="v-pills-changelogo"
                             aria-selected="true"
                           >
-                            <i className="fal fa-home" />
                             <span className="hidden-sm-down ml-1">
                               {' '}
                               Change Logo
@@ -331,7 +330,6 @@ const GuildList = ({
                             aria-controls="v-pills-changeguild-description"
                             aria-selected="false"
                           >
-                            <i className="fal fa-user" />
                             <span className="hidden-sm-down ml-1">
                               {' '}
                               Change Guild Description
@@ -346,7 +344,6 @@ const GuildList = ({
                             aria-controls="v-pills-renameguildrank"
                             aria-selected="false"
                           >
-                            <i className="fal fa-envelope" />
                             <span className="hidden-sm-down ml-1">
                               {' '}
                               Rename Guild Ranks
@@ -361,7 +358,6 @@ const GuildList = ({
                             aria-controls="v-pills-disband"
                             aria-selected="false"
                           >
-                            <i className="fal fa-cog" />
                             <span className="hidden-sm-down ml-1">
                               Disband Guild
                             </span>

@@ -152,7 +152,7 @@ const Menu = ({ mobile }) => {
                 <Link className="dropdown-item" to="#">
                   Killers
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/guilds">
                   Guilds
                 </Link>
               </div>

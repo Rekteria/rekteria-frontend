@@ -1,20 +1,17 @@
 import React from 'react';
+import { FaThList } from 'react-icons/fa';
+import { RiTableLine } from 'react-icons/ri';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { guildCreate, guildList } from '../../actions/GuildActions';
 import { playerList } from '../../actions/PlayerActions';
-import { getFormData } from '../../helpers/FormData';
-import { getImageUrl } from '../../helpers/Api';
-
-import Container from '../Layouts/Container';
-import { RiTableLine } from 'react-icons/ri';
-import { FaThList } from 'react-icons/fa';
-
 import GuildLogoDefault from '../../assets/img/guild_logo_default.png';
+import { getImageUrl } from '../../helpers/Api';
+import { getFormData } from '../../helpers/FormData';
+import Container from '../Layouts/Container';
 
 const Guilds = ({ playerList, guildList, players }) => {
   const [guild, setGuild] = React.useState([]);
-  const [className, setClassName] = React.useState('col-xl-4');
   const [postInteraction, setPostInteraction] = React.useState(false);
 
   function interaction() {
@@ -36,19 +33,13 @@ const Guilds = ({ playerList, guildList, players }) => {
     interaction();
   };
 
-  const clickToRow = () => setClassName('col-xl-12');
-  const clickToGrid = () => setClassName('col-xl-4');
-
-  console.log(guild);
-
   return (
     <Container>
-      <div className="row">
+      <div className="row" style={{ marginTop: '11px' }}>
         <div className="col-xl-12">
           <div className="border-faded bg-faded p-3 mb-g d-flex">
             <input
               type="text"
-              id="js-filter-guilds"
               name="filter-guilds"
               className="form-control shadow-inset-2 form-control-lg"
               placeholder="Filter Guilds"
@@ -56,87 +47,57 @@ const Guilds = ({ playerList, guildList, players }) => {
             <div
               className="btn-group btn-group-lg btn-group-toggle hidden-lg-down ml-3"
               data-toggle="buttons"
-            >
-              <label
-                className={`btn btn-default ${
-                  className === 'col-xl-4' && 'active'
-                } waves-effect waves-themed`}
-              >
-                <input
-                  type="radio"
-                  name="guildsview"
-                  id="grid"
-                  defaultChecked
-                  onClick={clickToGrid}
-                />
-                <RiTableLine size={24} />
-              </label>
-              <label
-                className={`btn btn-default ${
-                  className === 'col-xl-12' && 'active'
-                } waves-effect waves-themed`}
-              >
-                <input
-                  type="radio"
-                  name="guildsview"
-                  id="table"
-                  onClick={clickToRow}
-                />
-                <FaThList size={24} />
-              </label>
-            </div>
+            ></div>
           </div>
         </div>
       </div>
 
       <div className="text-center mb-3">
         <form onSubmit={submitHandler}>
-          <div className="col-xl-6 ml-auto mr-auto">
-            <div className="card p-4 rounded-plus bg-faded">
-              <div className="form-group row">
-                <div className="col-6 pr-1">
-                  <select className="form-control" name="ownerid">
-                    {players && players.length
-                      ? players.map((player) => {
-                          return (
-                            <option key={player.id} value={player.id}>
-                              {player.name}
-                            </option>
-                          );
-                        })
-                      : null}
-                  </select>
-                  {/* <div className="invalid-feedback">
+          <div className="card p-4 bg-faded">
+            <div className="form-group row">
+              <div className="col-6 pr-1">
+                <select className="form-control" name="ownerid">
+                  {players && players.length
+                    ? players.map((player) => {
+                        return (
+                          <option key={player.id} value={player.id}>
+                            {player.name}
+                          </option>
+                        );
+                      })
+                    : null}
+                </select>
+                {/* <div className="invalid-feedback">
 										No, you missed this one.
 									</div> */}
-                </div>
-                <div className="col-6 pl-1">
-                  <input
-                    className="form-control"
-                    type="text"
-                    name="name"
-                    placeholder="Guild Name"
-                    required
-                  />
-                </div>
               </div>
-              <div className="form-group">
-                <textarea
+              <div className="col-6 pl-1">
+                <input
                   className="form-control"
-                  name="description"
-                  id="description"
-                  placeholder="Description"
-                  cols="30"
-                  rows="3"
-                ></textarea>
+                  type="text"
+                  name="name"
+                  placeholder="Guild Name"
+                  required
+                />
               </div>
+            </div>
+            <div className="form-group">
+              <textarea
+                className="form-control"
+                name="description"
+                id="description"
+                placeholder="Description"
+                cols="30"
+                rows="3"
+              ></textarea>
+            </div>
 
-              <div className="row justify-content-center pb-1">
-                <div className="mx-auto">
-                  <button className="btn btn-block btn-danger btn-lg mt-3 waves-effect waves-themed">
-                    Create Guild
-                  </button>
-                </div>
+            <div className="row justify-content-center pb-1">
+              <div className="mx-auto">
+                <button className="btn btn-block btn-danger btn-lg mt-3 waves-effect waves-themed">
+                  Create Guild
+                </button>
               </div>
             </div>
           </div>
@@ -146,7 +107,7 @@ const Guilds = ({ playerList, guildList, players }) => {
       {/* Guilds List */}
       <div className="row">
         {guild.map((guilds, index) => (
-          <div key={guilds.id} className={className}>
+          <div key={guilds.id} className="col-xl-4">
             <div className="card border shadow-0 shadow-sm-hover mb-g">
               <div className="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                 <div className="d-flex flex-row align-items-center">
@@ -169,10 +130,6 @@ const Guilds = ({ playerList, guildList, players }) => {
                         {guilds.name}
                       </span>
                     </Link>
-
-                    <span className="text-truncate text-truncate-xl">
-                      Leader: {guilds.player.name}
-                    </span>
                   </div>
                   <button
                     className="js-expand-btn btn btn-sm btn-default waves-effect waves-themed"
@@ -190,6 +147,9 @@ const Guilds = ({ playerList, guildList, players }) => {
 
               <div id={`collapse${index}`} className="card-body p-0 collapse">
                 <div className="p-3">
+                  <span className="text-truncate text-truncate-xl">
+                    Leader: {guilds.player.name}
+                  </span>
                   <span className="mt-1 d-block fs-sm fw-400 text-dark">
                     {guilds.description}
                   </span>

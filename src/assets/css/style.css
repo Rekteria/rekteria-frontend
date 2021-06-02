@@ -107,9 +107,6 @@ a {
 }
 .status {
   height: 43px;
-  background: #0005;
-  border-bottom: 1px solid #00000038;
-  box-shadow: 0 2px 7px #0007;
   color: #fff8;
 }
 .status .el {
