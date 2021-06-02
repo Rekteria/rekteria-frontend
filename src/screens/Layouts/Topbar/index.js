@@ -6,11 +6,11 @@ import IconStreamers from '../../../assets/img/icon-streamers.png';
 import IconViwers from '../../../assets/img/icon-viewers.png';
 import IconYoutuber from '../../../assets/img/icon-youtube.png';
 
-const Topbar = () => {
+const Topbar = ({ currentStatus }) => {
   return (
     <div className="topbar streams">
       <div className="el">
-        <span style={{ color: '#f7bfbf' }}>Server Offline!</span>
+        <span style={{ color: '#f7bfbf' }}>{currentStatus}!</span>
       </div>{' '}
       <div className="el">IP: Rekteria.net</div>
       <div className="el">Port: 7171</div>

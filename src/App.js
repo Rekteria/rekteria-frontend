@@ -27,7 +27,7 @@ import GuildList from './screens/Guilds/GuildList';
 import Online from './screens/Online';
 import Shop from './screens/Shop';
 import BuyCoins from './screens/BuyCoins';
-import LoadingBar from 'react-redux-loading-bar'
+import LoadingBar from 'react-redux-loading-bar';
 
 import PageSearch from './components/PageSearch';
 import ProtectedRoute from './helpers/ProtectedRoute';
@@ -110,7 +110,6 @@ const App = ({ initAccount }) => {
           <Route exact path="/buycoins" component={BuyCoins} />
 
           <Route exact path="/" component={Home} />
-          {/* <Route exact path="/login" /> */}
         </Switch>
       </BrowserRouter>
     </>

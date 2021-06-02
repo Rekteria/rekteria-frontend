@@ -1,7 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { getAccount } from '../../../helpers/Account';
-
+import { serverStatus } from '../../../actions/OnlineActions';
 import useMedia from '../../../Hooks/useMedia';
 
 import Navbar from '../Navbar';
@@ -13,14 +14,22 @@ import ComingEventsWidget from '../Widgets/ComingEventsWidget';
 import BuyCharacterWidget from '../Widgets/BuyCharacterWidget';
 
 const Container = ({ children }) => {
+  const dispatch = useDispatch();
   const account = getAccount();
   const { pathname } = useLocation('');
   const mobile = useMedia('(max-width: 40rem)');
   const [, setMobileMenu] = React.useState(false);
+  const [currentStatus, setCurrentStatus] = React.useState('');
 
   React.useEffect(() => {
     setMobileMenu(false);
   }, [pathname]);
+
+  React.useEffect(() => {
+    dispatch(serverStatus()).then(({ payload }) => {
+      setCurrentStatus(payload.data);
+    });
+  }, [dispatch]);
 
   return (
     <>
@@ -31,7 +40,7 @@ const Container = ({ children }) => {
       {/* /.container */}
       <div className="container">
         <div className="chainbg" />
-        <Topbar />
+        <Topbar currentStatus={currentStatus} />
         <div className="content-border">
           <div className="content-bg">
             <div className="row">

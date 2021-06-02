@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { forumBoard } from '../../actions/ForumActions';
 
+import useFullPageLoader from '../../Hooks/useFullPageLoader';
 import { getImageUrl } from '../../helpers/Api';
 import { groupsId } from '../../config';
 import { formatDate } from '../../helpers/DateTime';
@@ -18,18 +19,21 @@ import { Link } from 'react-router-dom';
 
 const Home = ({ forumBoard }) => {
   const [newsPost, setNewsPost] = React.useState([]);
-
   const [isOpened, setIsOpened] = React.useState(false);
+  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   React.useEffect(() => {
+    showLoader();
     forumBoard(1)
       .then(({ payload }) => {
         const newData = payload.data.data;
         setNewsPost(newData);
+        hideLoader();
       })
       .catch((err) => {
         console.log(err);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forumBoard]);
 
   const newsTickerToggle = () => {
@@ -141,6 +145,7 @@ const Home = ({ forumBoard }) => {
           <p>No news exist.</p>
         )}
       </div>
+      {loader}
     </Container>
   );
 };
