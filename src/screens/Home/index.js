@@ -79,64 +79,67 @@ const Home = ({ forumBoard }) => {
             </tr>
           </tbody>
         </table>
-        {newsPost.map((news) => {
-          return (
-            <div key={news.id} className="card mb-g">
-              <div className="card-body pb-0 px-4">
-                <div class="row">
-                  <div class="col-1">
-                    <div className="d-inline-block align-middle status status-success mr-3">
-                      {news?.account.avatar ? (
-                        <img
-                          src={getImageUrl(news?.account.avatar)}
-                          className="profile-image rounded-circle"
-                          alt=""
-                        />
-                      ) : (
-                        <img
-                          src={noneAvatar}
-                          className="profile-image rounded-circle"
-                          alt=""
-                        />
-                      )}
+        {newsPost?.length > 0 ? (
+          newsPost.map((news) => {
+            return (
+              <div key={news.id} className="card mb-g">
+                <div className="card-body pb-0 px-4">
+                  <div className="row">
+                    <div className="col-1">
+                      <div className="d-inline-block align-middle status status-success mr-3">
+                        {news?.account.avatar ? (
+                          <img
+                            src={getImageUrl(news?.account.avatar)}
+                            className="profile-image rounded-circle"
+                            alt=""
+                          />
+                        ) : (
+                          <img
+                            src={noneAvatar}
+                            className="profile-image rounded-circle"
+                            alt=""
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <div className="col-8">
+                      <h5 className="mb-0 flex-1 text-dark fw-500">
+                        {news.character_name}
+                      </h5>
+                      <small className="m-0 l-h-n">
+                        {groupsId[news?.account.players[0].group_id]}
+                      </small>
+                    </div>
+                    <div className="col-3 text-right">
+                      <span className="float-right">
+                        <BiTimeFive size={20} className="mr-1" />
+                        {formatDate(news.createdAt)}
+                      </span>
                     </div>
                   </div>
-                  <div class="col-8">
-                    <h5 className="mb-0 flex-1 text-dark fw-500">
-                      {news.character_name}
-                    </h5>
-                    <small className="m-0 l-h-n">
-                      {groupsId[news?.account.players[0].group_id]}
-                    </small>
-                  </div>
-                  <div class="col-3 text-right">
-                    <span className="float-right">
-                      <BiTimeFive size={20} className="mr-1" />
-                      {formatDate(news.createdAt)}
-                    </span>
-                  </div>
-                </div>
 
-                <hr className="m-0 w-100" />
-                <br />
-                <h2 className="subheader-title">
-                  <FaNewspaper size={20} className="mr-2" />
-                  {news.title}
-                </h2>
-                <div
-                  className="pb-3 pt-2 border-top-0 border-left-0 border-right-0 text-muted"
-                  dangerouslySetInnerHTML={{ __html: news.body_text }}
-                />
-              </div>
-              <div className="card-body py-0 px-4 border-faded border-right-0 border-bottom-0 border-left-0">
-                <div className="d-flex flex-column align-items-center">
                   <hr className="m-0 w-100" />
+                  <br />
+                  <h2 className="subheader-title">
+                    <FaNewspaper size={20} className="mr-2" />
+                    {news.title}
+                  </h2>
+                  <div
+                    className="pb-3 pt-2 border-top-0 border-left-0 border-right-0 text-muted"
+                    dangerouslySetInnerHTML={{ __html: news.body_text }}
+                  />
+                </div>
+                <div className="card-body py-0 px-4 border-faded border-right-0 border-bottom-0 border-left-0">
+                  <div className="d-flex flex-column align-items-center">
+                    <hr className="m-0 w-100" />
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-        {/* <p>No news exist.</p>{' '} */}
+            );
+          })
+        ) : (
+          <p>No news exist.</p>
+        )}
       </div>
     </Container>
   );

@@ -136,18 +136,18 @@ const SignUp = ({ signUp, account }) => {
                   </div>
 
                   <div className="form-group demo">
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="checkbox"
                         value=""
                         id="invalidCheck"
                         required
                       />
-                      <label class="form-check-label" for="invalidCheck">
+                      <label className="form-check-label" for="invalidCheck">
                         Agree to terms and conditions
                       </label>
-                      <div class="invalid-feedback">
+                      <div className="invalid-feedback">
                         You must agree before submitting.
                       </div>
                     </div>
