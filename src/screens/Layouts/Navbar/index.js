@@ -137,7 +137,7 @@ const Menu = ({ mobile }) => {
                 Community
               </Link>
               <div className="dropdown-menu">
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/online">
                   Who is online?
                 </Link>
                 <Link className="dropdown-item" to="#">
