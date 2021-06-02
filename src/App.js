@@ -27,6 +27,9 @@ import GuildList from './screens/Guilds/GuildList';
 import Online from './screens/Online';
 import Shop from './screens/Shop';
 import BuyCoins from './screens/BuyCoins';
+import ServerInfo from './screens/Serverinfo';
+import Support from './screens/Support';
+
 import LoadingBar from 'react-redux-loading-bar';
 
 import PageSearch from './components/PageSearch';
@@ -105,6 +108,8 @@ const App = ({ initAccount }) => {
           <Route exact path="/guilds/:id" component={GuildList} />
 
           <Route exact path="/online" component={Online} />
+          <Route exact path="/info" component={ServerInfo} />
+          <Route exact path="/support" component={Support} />
 
           <Route exact path="/shop" component={Shop} />
           <Route exact path="/buycoins" component={BuyCoins} />

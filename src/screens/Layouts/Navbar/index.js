@@ -189,16 +189,16 @@ const Menu = ({ mobile }) => {
                 Library
               </Link>
               <div className="dropdown-menu">
-                <Link className="dropdown-item" to="#">
-                  Gallery
+                <Link className="dropdown-item" to="/info">
+                  Server Info
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/support">
                   Support
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/houses">
                   Houses
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/spells">
                   Spells
                 </Link>
                 <Link className="dropdown-item" to="#">

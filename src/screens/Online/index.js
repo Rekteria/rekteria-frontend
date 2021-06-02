@@ -88,7 +88,7 @@ const Online = ({ playersOnline }) => {
                       {whoOnline?.player.name}
                     </Link>
                   </td>
-                  <td>{whoOnline?.guild_memberships[0].guild.name}</td>
+                  <td>{whoOnline?.guild_memberships[0]?.guild.name}</td>
                   <td>
                     <span className="badge opacity-50 p-1 width-6 bg-primary border-primary text-white">
                       {whoOnline?.player.level}
