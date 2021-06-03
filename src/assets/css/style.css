@@ -68,6 +68,7 @@ a {
 .content-bg .btn {
   background-image: url(../img/btn_bg.png);
   background-position: center 50%;
+  background-size: cover;
   background-repeat: repeat-x;
   box-shadow: 0 1px 8px #0007;
   font-weight: bold;
@@ -318,6 +319,7 @@ a {
 .panel {
   max-width: 96%;
   margin: 20px;
+  margin-top: 9px;
   background-color: #fff;
   border: 1px solid transparent;
   border-radius: 4px;

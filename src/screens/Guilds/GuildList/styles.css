@@ -23,20 +23,10 @@
 }
 /* font guild name */
 
-.attempt-1 {
-  font-size: 2rem;
-}
-.attempt-1 em {
-  font-style: normal;
-  padding: 0.1em 0.3em;
-  border-radius: 0.2em;
-  position: relative;
-  background: white;
-  background: linear-gradient(to right, #2d797d, #52aeb3);
-  color: white;
-  transform: skewX(-10deg);
-  display: inline-block;
-  top: 10rem;
+.guild-name {
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 /* tabs ranks */

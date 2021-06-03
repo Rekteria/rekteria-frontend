@@ -3,7 +3,7 @@ import { FaRegTrashAlt, FaSignInAlt, FaUsers } from 'react-icons/fa';
 import { FiSettings } from 'react-icons/fi';
 import { GiBattleGear } from 'react-icons/gi';
 import { connect, useDispatch } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 import {
@@ -24,10 +24,13 @@ import GuildLogoDefault from '../../../assets/img/guild_logo_default.png';
 import { characterVocations } from '../../../config';
 import { getImageUrl } from '../../../helpers/Api';
 import { getFormData } from '../../../helpers/FormData';
+import { formatDate } from '../../../helpers/DateTime';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 import Container from '../../Layouts/Container';
 import ChangeLogo from './ChangeLogo';
 import GuildDescription from './GuildDescription';
 import GuildRank from './GuildRank';
+
 import './styles.css';
 
 const GuildList = ({
@@ -44,6 +47,8 @@ const GuildList = ({
   guildRemove,
   guild,
   playerList,
+  showLoading,
+  hideLoading,
 }) => {
   const [currentGuild, setCurrentGuild] = React.useState([]);
   const [member, setMember] = React.useState([]);
@@ -63,37 +68,45 @@ const GuildList = ({
   const history = useHistory();
   const dispatch = useDispatch();
   const { id } = useParams();
+  let { state } = useLocation();
 
   function interaction() {
     setPostInteraction(!postInteraction);
   }
 
   React.useEffect(() => {
+    showLoading();
     playerList().then(({ payload }) => {
       const newData = payload.data.data;
       setGetPlayerInAccount(newData);
+      hideLoading();
     });
     guildShow(id).then(({ payload }) => {
       const newData = payload.data.data;
       setCurrentGuild(newData);
+      hideLoading();
     });
     guildMember(id).then(({ payload }) => {
       const newData = payload.data.data;
       setMember(newData);
+      hideLoading();
     });
     guildGetInvites(id).then(({ payload }) => {
       const newData = payload.data.data;
       setInvitedList(newData);
+      hideLoading();
     });
-
     guildHasInvite(id).then(({ payload }) => {
       const newData = payload.data.data;
       setAcceptInvite(newData);
+      hideLoading();
     });
     editGuildRanks(id).then(({ payload }) => {
       const newData = payload.data.data;
       setGetRanks(newData);
+      hideLoading();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     id,
     guildShow,
@@ -101,8 +114,8 @@ const GuildList = ({
     guildMember,
     guildHasInvite,
     editGuildRanks,
-    postInteraction,
     playerList,
+    postInteraction,
   ]);
 
   const submitHandler = (e) => {
@@ -187,6 +200,8 @@ const GuildList = ({
     verifyRanks.includes(arr1Item)
   );
 
+  //create logic to leader view settings.
+
   const deleteClick = (e) => setGuildToRemove(currentGuild);
   const cancelDelete = (e) => setGuildToRemove(null);
   const confirmDelete = async (e) => {
@@ -201,9 +216,7 @@ const GuildList = ({
     // const b = a.childNodes[0];
     // const c = b.childNodes[0].innerHTML;
     // console.log(c);
-
-    const a = event.target.parentNode.childNodes[0].innerHTML;
-    console.log(a);
+    // const a = event.target.parentNode.childNodes[0].innerHTML;
   };
 
   return (
@@ -211,41 +224,73 @@ const GuildList = ({
       <div className="panel panel-default mx-auto">
         <div className="panel-heading">Overview</div>
         <div className="panel-body">
-          <div className="parent">
-            <div className="guild-logo ml-4">
-              <div className="d-inline-flex flex-column justify-content-center mr-3">
-                <span className="fw-300 fs-xs d-block opacity-50">
-                  {currentGuild.logo_gfx_name === undefined ? null : (
-                    <img
-                      className="profile-image-lg"
-                      src={`${
-                        currentGuild.logo_gfx_name === '' ||
-                        currentGuild.logo_gfx_name === null
-                          ? GuildLogoDefault
-                          : currentGuild.logo_gfx_name &&
-                            getImageUrl(currentGuild.logo_gfx_name)
-                      }`}
-                      alt="GuildLogo"
-                    />
-                  )}
-                </span>
-                <span className="fw-500 fs-xl d-block color-primary-500 mb-6 mx-auto">
-                  0 Member
-                </span>
-              </div>
-            </div>
-            <div className="guild-description ml-4">
-              <h2 className="text-primary">Guild Description</h2>
+          <div style={{ float: 'left', marginRight: 10 }}>
+            <span className="fw-300 fs-xs d-block opacity-50">
+              {currentGuild.logo_gfx_name === undefined ? null : (
+                <img
+                  className="profile-image-lg"
+                  src={`${
+                    currentGuild.logo_gfx_name === '' ||
+                    currentGuild.logo_gfx_name === null
+                      ? GuildLogoDefault
+                      : currentGuild.logo_gfx_name &&
+                        getImageUrl(currentGuild.logo_gfx_name)
+                  }`}
+                  alt="GuildLogo"
+                />
+              )}
+            </span>
+          </div>
+          <div style={{ float: 'right', marginRight: 10 }}>
+            <span className="fw-300 fs-xs d-block opacity-50">
+              {currentGuild.logo_gfx_name === undefined ? null : (
+                <img
+                  className="profile-image-lg"
+                  src={`${
+                    currentGuild.logo_gfx_name === '' ||
+                    currentGuild.logo_gfx_name === null
+                      ? GuildLogoDefault
+                      : currentGuild.logo_gfx_name &&
+                        getImageUrl(currentGuild.logo_gfx_name)
+                  }`}
+                  alt="GuildLogo"
+                />
+              )}
+            </span>
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              transform: 'translate(-50%, 0)',
+              marginTop: '-10px',
+            }}
+          >
+            <div className="centered guild-name">{currentGuild.name}</div>
+          </div>
+          <div id="guildDescription">
+            <p>
+              <br />
+            </p>
+            <center>
+              <br />
               <p
-                dangerouslySetInnerHTML={{ __html: currentGuild.description }}
+                dangerouslySetInnerHTML={{
+                  __html: currentGuild.description,
+                }}
               />
-            </div>
-            <div className="guild-name">
-              <span className="display-4 d-block l-h-n m-0 fw-500 text-primary">
-                <p className="attempt-1">
-                  <em>{currentGuild.name}</em>
-                </p>
-              </span>
+            </center>
+            <p />
+          </div>
+          <div className="panel panel-default">
+            <div className="panel-body">
+              <div>
+                The guild was founded on <strong>Rekteria</strong> on{' '}
+                {formatDate(currentGuild.createdAt)}
+              </div>
+              <div className="text-success">
+                Current leader is {state.leader}.
+              </div>
             </div>
           </div>
 
@@ -278,20 +323,24 @@ const GuildList = ({
 
             <hr />
             <div className="tab-content">
-              <div className="tab-pane active table-responsive" id="members">
-                <table className="table table-bordered ">
+              <div className="tab-pane active" id="members">
+                <table className="table table-sm">
                   <thead>
                     <tr>
                       <th>Rank</th>
-
                       <th>Player</th>
-                      <th>Vocation &amp; Level</th>
+                      <th>Vocation</th>
+                      <th>Level</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {member.map((members) =>
+                    {member.map((members, index) =>
                       members.rank === members.guild_rank.level ? (
-                        <tr key={members.id}>
+                        <tr
+                          key={members.id}
+                          className={index % 2 !== 0 ? 'highscores-tr-odd' : ''}
+                        >
                           <td>
                             {members.rank === members.guild_rank.level
                               ? members.guild_rank.name
@@ -299,30 +348,24 @@ const GuildList = ({
                           </td>
 
                           <td>
-                            <div
-                              className={`${
-                                members.players_online === null
-                                  ? `d-inline-block align-middle status status-danger pr-3`
-                                  : `d-inline-block align-middle status status-success pr-3`
-                              }`}
-                            >
-                              <div className="info-card-text flex-1">
-                                <h2 className="fs-xl text-truncate text-truncate-lg text-primary">
-                                  <Link
-                                    to={`/character/${members.player.name}`}
-                                  >
-                                    {members.player.name}{' '}
-                                    {/* <span className="fw-300">
-                                      <i>(Rei do Gesior)</i>
-                                    </span> */}
-                                  </Link>
-                                </h2>
-                              </div>
+                            <div className="info-card-text flex-1">
+                              <h2 className="fs-xl text-  uncate text-truncate-lg text-primary">
+                                <Link to={`/character/${members.player.name}`}>
+                                  {members.player.name}{' '}
+                                </Link>
+                              </h2>
                             </div>
                           </td>
                           <td className="hidden-xs">
-                            {characterVocations[members.player.vocation]} (Level{' '}
-                            {members.player.level})
+                            {characterVocations[members.player.vocation]}
+                          </td>
+                          <td>(Level {members.player.level})</td>
+                          <td>
+                            {members.players_online === null ? (
+                              <font color="FF0000">Offline</font>
+                            ) : (
+                              <font color="00FF00">Online</font>
+                            )}
                           </td>
                         </tr>
                       ) : null
@@ -618,4 +661,6 @@ export default connect(mapStateToProps, {
   setGuildToRemove,
   guildRemove,
   playerList,
+  showLoading,
+  hideLoading,
 })(GuildList);
