@@ -196,6 +196,16 @@ const GuildList = ({
     }
   };
 
+  const handleDeleteInvited = (event) => {
+    // const a = event.target.parentNode.parentNode.parentNode;
+    // const b = a.childNodes[0];
+    // const c = b.childNodes[0].innerHTML;
+    // console.log(c);
+
+    const a = event.target.parentNode.childNodes[0].innerHTML;
+    console.log(a);
+  };
+
   return (
     <Container>
       <div className="panel panel-default mx-auto">
@@ -494,10 +504,7 @@ const GuildList = ({
                 ? acceptInvite.map((list) => (
                     <tr key={list.id}>
                       <td>
-                        <Link
-                          className="notranslate"
-                          to={`/character/${list.player.name}`}
-                        >
+                        <Link to={`/character/${list.player.name}`}>
                           {list.player.name}
                         </Link>
                       </td>
@@ -526,11 +533,18 @@ const GuildList = ({
                     <tr key={list.id}>
                       <td>
                         <Link
-                          className="notranslate"
                           to={`/character/${list.player.name}`}
+                          id="deleteInvite"
                         >
                           {list.player.name}
                         </Link>
+                        {settings.length > 0 ? (
+                          <FaRegTrashAlt
+                            size={14}
+                            onClick={handleDeleteInvited}
+                            className="ml-2"
+                          />
+                        ) : null}
                       </td>
                       <td className="hidden-xs">
                         {characterVocations[list.player.vocation]} (Level{' '}
@@ -548,9 +562,6 @@ const GuildList = ({
                             >
                               <FaSignInAlt size={14} />
                             </button>
-                          ) : null}
-                          {settings.length > 0 ? (
-                            <FaRegTrashAlt size={14} />
                           ) : null}
                         </div>
                       </td>
