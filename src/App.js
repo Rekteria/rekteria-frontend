@@ -24,6 +24,7 @@ import ChangePassword from './screens/Account/ChangePassword';
 import Downloads from './screens/Downloads';
 import Guilds from './screens/Guilds';
 import GuildList from './screens/Guilds/GuildList';
+import GuildCreate from './screens/Guilds/GuildCreate';
 import Online from './screens/Online';
 import Shop from './screens/Shop';
 import BuyCoins from './screens/BuyCoins';
@@ -104,7 +105,7 @@ const App = ({ initAccount }) => {
           <Route exact path="/downloads" component={Downloads} />
 
           <Route exact path="/guilds" component={Guilds} />
-
+          <Route exact path="/guilds/create" component={GuildCreate} />
           <Route exact path="/guilds/:id" component={GuildList} />
 
           <Route exact path="/online" component={Online} />

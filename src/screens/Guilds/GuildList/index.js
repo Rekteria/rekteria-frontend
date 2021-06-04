@@ -59,6 +59,7 @@ const GuildList = ({
   const [image, setImage] = React.useState('');
   const [imagePreview, setImagePreview] = React.useState('');
   const [getPlayerInAccount, setGetPlayerInAccount] = React.useState([]);
+  const [havePermission, setHavePermission] = React.useState(false);
 
   const [getRanks, setGetRanks] = React.useState([]);
   const [editLeader, setEditLeader] = React.useState('');
@@ -117,6 +118,20 @@ const GuildList = ({
     playerList,
     postInteraction,
   ]);
+
+  React.useEffect(() => {
+    getPlayerInAccount.forEach((item) => {
+      for (const getLeader of member) {
+        if (getLeader.player_id === item.id) {
+          if (getLeader.rank >= 2) {
+            setHavePermission(true);
+          }
+        } else {
+          return false;
+        }
+      }
+    });
+  }, [getPlayerInAccount, member]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -193,15 +208,6 @@ const GuildList = ({
       });
   };
 
-  const getPlayer = getPlayerInAccount.map((player) => player.id);
-  const verifyRanks = member.map((member) => member.player_id);
-
-  const settings = getPlayer.filter((arr1Item) =>
-    verifyRanks.includes(arr1Item)
-  );
-
-  //create logic to leader view settings.
-
   const deleteClick = (e) => setGuildToRemove(currentGuild);
   const cancelDelete = (e) => setGuildToRemove(null);
   const confirmDelete = async (e) => {
@@ -210,6 +216,8 @@ const GuildList = ({
       history.push('/guilds');
     }
   };
+
+  console.log(havePermission);
 
   const handleDeleteInvited = (event) => {
     // const a = event.target.parentNode.parentNode.parentNode;
@@ -289,7 +297,7 @@ const GuildList = ({
                 {formatDate(currentGuild.createdAt)}
               </div>
               <div className="text-success">
-                Current leader is {state.leader}.
+                Current leader is {state && state.leader}.
               </div>
             </div>
           </div>
@@ -311,7 +319,7 @@ const GuildList = ({
                   <GiBattleGear className="mr-1" size={20} /> Active Wars
                 </a>
               </li>
-              {settings.length > 0 ? (
+              {havePermission === true ? (
                 <li className="nav-item">
                   <a className="nav-link" data-toggle="tab" href="#settings">
                     <FiSettings className="mr-1" size={20} />
@@ -581,7 +589,7 @@ const GuildList = ({
                         >
                           {list.player.name}
                         </Link>
-                        {settings.length > 0 ? (
+                        {havePermission === true ? (
                           <FaRegTrashAlt
                             size={14}
                             onClick={handleDeleteInvited}
@@ -614,7 +622,7 @@ const GuildList = ({
           </table>
         </form>
       </div>
-      {settings.length > 0 ? (
+      {havePermission === true ? (
         <form onSubmit={submitHandler}>
           <div className="d-flex flex-column align-items-center justify-content-center text-center">
             <div className="row">
