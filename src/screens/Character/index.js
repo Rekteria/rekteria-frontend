@@ -11,6 +11,7 @@ import Profile from './Profile';
 import Achievement from './Achievement';
 import DeathList from './DeathList';
 import CharacterList from './CharacterList';
+import CharacterVictims from './CharacterVictims';
 // import './styles.css';
 
 // const arrItems = {
@@ -110,6 +111,11 @@ const Character = ({ playerGetCharacter }) => {
               {/* DeathList start */}
               <h3>DeathList</h3>
               <DeathList playerDeaths={playerDeaths} />
+              {/* Deathlist end */}
+
+              {/* DeathList start */}
+              <h3>Character Victims</h3>
+              <CharacterVictims playerDeaths={playerDeaths} />
               {/* Deathlist end */}
 
               {/* CharcterList */}

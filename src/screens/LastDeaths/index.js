@@ -40,20 +40,43 @@ const LastDeaths = () => {
                 {deathPlayer.map((death) => {
                   return (
                     <tr key={death.time}>
+                      {console.log(death)}
                       <td>
                         <Link to={`/character/${death?.player.name}`}>
                           {death?.player.name}
                         </Link>
                       </td>
                       <td>
-                        at level {death.level} by{' '}
-                        <font color="red">
-                          <b>{death.killed_by}</b>
-                        </font>{' '}
-                        and most damage{' '}
-                        <font color="green">
-                          <b>{death.mostdamage_by}</b>
-                        </font>
+                        at level {death.level} by
+                        {death.is_player !== 0 ? (
+                          <Link to={`/character/${death.killed_by}`}>
+                            <font className="m-1" color="red">
+                              <b>{death.killed_by}</b>
+                            </font>
+                          </Link>
+                        ) : (
+                          <font className="m-1">
+                            <b>{death.killed_by}</b>
+                          </font>
+                        )}
+                        {death.killed_by !== death.mostdamage_by &&
+                        death.is_player !== 0 ? (
+                          <>
+                            and
+                            <span className="badge badge-danger m-1">
+                              <font style={{ fontSize: '12px' }}>
+                                most damage
+                              </font>
+                            </span>
+                            <Link
+                              to={`/character/${death.mostdamage_by}`}
+                              className="notranslate"
+                            >
+                              <strong>{death.mostdamage_by}</strong>
+                            </Link>
+                            .
+                          </>
+                        ) : null}
                       </td>
                       <td>{convertTimestempToDate(death.time)}</td>
                     </tr>
