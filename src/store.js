@@ -10,8 +10,9 @@ import inventoryReducer from './reducers/InventoryReducer';
 import pagarmeReducer from './reducers/PagarmeReducer';
 import paymentHistoryReducer from './reducers/PaymentHistoryReducer';
 import pixGerenciaReducer from './reducers/PixGerenciaReducer';
-import { loadingBarMiddleware } from 'react-redux-loading-bar'
-import { loadingBarReducer } from 'react-redux-loading-bar'
+import playerDeathsReducer from './reducers/PixGerenciaReducer';
+import { loadingBarMiddleware } from 'react-redux-loading-bar';
+import { loadingBarReducer } from 'react-redux-loading-bar';
 
 const reducers = combineReducers({
   account: accountReducer,
@@ -25,8 +26,12 @@ const reducers = combineReducers({
   paymentHistory: paymentHistoryReducer,
   pixGerencia: pixGerenciaReducer,
   loadingBar: loadingBarReducer,
+  playerDeaths: playerDeathsReducer,
 });
 
-const store = createStore(reducers, applyMiddleware(ReduxPromise, loadingBarMiddleware()));
+const store = createStore(
+  reducers,
+  applyMiddleware(ReduxPromise, loadingBarMiddleware())
+);
 
 export default store;

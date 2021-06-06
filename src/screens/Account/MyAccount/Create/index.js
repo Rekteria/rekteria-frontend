@@ -14,7 +14,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
   const [name, setName] = React.useState('');
   const [sex, setSex] = React.useState('');
   const [vocation, setVocation] = React.useState('');
-  const [town, setTown] = React.useState(0);
+  const [town_id, setTown_id] = React.useState();
 
   React.useEffect(() => {
     playerList();
@@ -27,7 +27,7 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
       name,
       sex,
       vocation,
-      town,
+      town_id,
     };
 
     playerCreate(data)
@@ -45,8 +45,9 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
           setError(message);
           toast.error(message);
         } else {
+          let messageError = Object.values(metadata.error);
           setError(metadata.error.name);
-          toast.error(metadata.error.name);
+          toast.error(messageError[0]);
         }
       });
   };
@@ -96,10 +97,10 @@ const CreateCharacter = ({ playerCreate, playerList, player }) => {
                           <td>Town:</td>
                           <td>
                             <select
-                              name="selected_gender"
+                              name="town_id"
                               className="form-control width:200px"
                               onChange={(event) =>
-                                setTown(Number(event.target.value))
+                                setTown_id(Number(event.target.value))
                               }
                             >
                               <option value="" selected hidden disabled>

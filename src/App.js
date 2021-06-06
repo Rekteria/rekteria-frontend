@@ -30,6 +30,8 @@ import Shop from './screens/Shop';
 import BuyCoins from './screens/BuyCoins';
 import ServerInfo from './screens/Serverinfo';
 import Support from './screens/Support';
+import LastDeaths from './screens/LastDeaths';
+import TopKillers from './screens/TopKillers';
 
 import LoadingBar from 'react-redux-loading-bar';
 
@@ -111,6 +113,8 @@ const App = ({ initAccount }) => {
           <Route exact path="/online" component={Online} />
           <Route exact path="/info" component={ServerInfo} />
           <Route exact path="/support" component={Support} />
+          <Route exact path="/deaths" component={LastDeaths} />
+          <Route exact path="/killers" component={TopKillers} />
 
           <Route exact path="/shop" component={Shop} />
           <Route exact path="/buycoins" component={BuyCoins} />

@@ -122,11 +122,11 @@ const Guilds = ({ guildList, showLoading, hideLoading }) => {
                           }}
                         >
                           <button
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm"
                             type="submit"
                             id="navbar-search-submit"
                           >
-                            <i className="fa fa-eye" aria-hidden="true" /> View
+                            View
                           </button>
                         </Link>
                       </td>

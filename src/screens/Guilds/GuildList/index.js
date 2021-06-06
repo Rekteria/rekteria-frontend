@@ -220,11 +220,8 @@ const GuildList = ({
   console.log(havePermission);
 
   const handleDeleteInvited = (event) => {
-    // const a = event.target.parentNode.parentNode.parentNode;
-    // const b = a.childNodes[0];
-    // const c = b.childNodes[0].innerHTML;
-    // console.log(c);
-    // const a = event.target.parentNode.childNodes[0].innerHTML;
+    const a = event.target.parentNode.childNodes[0].innerHTML;
+    console.log(a)
   };
 
   return (
@@ -509,7 +506,7 @@ const GuildList = ({
                               className="btn btn-lg btn-outline-danger waves-effect waves-themed col-12"
                               onClick={deleteClick}
                             >
-                              <span className="fal fa-times mr-1"></span>
+                              <span className="fas fa-times mr-1"></span>
                               Delete
                             </button>
                           </div>

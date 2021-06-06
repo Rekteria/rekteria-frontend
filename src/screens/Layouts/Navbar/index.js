@@ -146,12 +146,10 @@ const Menu = ({ mobile }) => {
                 <Link className="dropdown-item" to="#">
                   Helpdesk
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/deaths">
                   Deaths
                 </Link>
-                <Link className="dropdown-item" to="#">
-                  Killers
-                </Link>
+
                 <Link className="dropdown-item" to="/guilds">
                   Guilds
                 </Link>
@@ -172,7 +170,7 @@ const Menu = ({ mobile }) => {
                 <Link className="dropdown-item" to="/highscores">
                   Highscores
                 </Link>
-                <Link className="dropdown-item" to="#">
+                <Link className="dropdown-item" to="/killers">
                   Killers
                 </Link>
               </div>
