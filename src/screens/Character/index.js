@@ -115,7 +115,7 @@ const Character = ({ playerGetCharacter }) => {
 
               {/* DeathList start */}
               <h3>Character Victims</h3>
-              <CharacterVictims playerDeaths={playerDeaths} />
+              {/* <CharacterVictims playerDeaths={playerDeaths} /> */}
               {/* Deathlist end */}
 
               {/* CharcterList */}

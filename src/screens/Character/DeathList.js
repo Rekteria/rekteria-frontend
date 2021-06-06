@@ -14,7 +14,6 @@ const DeathList = ({ playerDeaths }) => {
           {playerDeaths.map((deaths) => {
             return (
               <tr key={deaths.time}>
-                {console.log(deaths)}
                 <td width="30%">{convertTimestempToDate(deaths.time)}</td>
                 <td>
                   Died on level {deaths.level} by

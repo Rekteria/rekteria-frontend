@@ -21,10 +21,12 @@ const CharacterVictims = ({ playerDeaths }) => {
                     className="notranslate"
                     href="/character/show/Fake-tibia-coach"
                   >
-                    <strong>Fake-tibia-coach</strong>
+                    <strong>{victims.player.name}</strong>
                   </a>{' '}
-                  at level 503.
-                  <font color="green">(Justified)</font>
+                  at level {victims.level}.
+                  <font className="m-1" color="green">
+                    (Justified)
+                  </font>
                 </td>
               </tr>
             ) : null;
