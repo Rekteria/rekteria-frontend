@@ -140,8 +140,8 @@ const Menu = ({ mobile }) => {
                 <Link className="dropdown-item" to="/online">
                   Who is online?
                 </Link>
-                <Link className="dropdown-item" to="#">
-                  Item Market
+                <Link className="dropdown-item" to="/bazar">
+                  Character Bazar
                 </Link>
                 <Link className="dropdown-item" to="#">
                   Helpdesk
