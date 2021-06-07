@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getTopKillers } from '../../actions/PlayerDeathsActions';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import Container from '../Layouts/Container';
 
@@ -11,11 +12,13 @@ const TopKillers = () => {
   const [topGuildKill, setTopGuildKill] = React.useState([]);
 
   React.useEffect(() => {
+    dispatch(showLoading());
     dispatch(getTopKillers())
       .then(({ payload }) => {
         const newData = payload.data.data;
         setTopKillers(newData.TopKillers);
         setTopGuildKill(newData.TopGuilds);
+        dispatch(hideLoading());
       })
       .catch((err) => {
         console.log(err);

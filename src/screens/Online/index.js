@@ -3,25 +3,22 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { playersOnline } from '../../actions/OnlineActions';
 import { characterVocations } from '../../config';
-import useFullPageLoader from '../../Hooks/useFullPageLoader';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import Container from '../Layouts/Container';
 
-const Online = ({ playersOnline }) => {
+const Online = ({ playersOnline, showLoading, hideLoading }) => {
   const [isOnline, setIsOnline] = React.useState([]);
-  const [loader, showLoader, hideLoader] = useFullPageLoader();
 
   React.useEffect(() => {
-    showLoader();
+    showLoading();
     playersOnline().then(({ payload }) => {
       const newData = payload.data.data;
       setIsOnline(newData);
-      hideLoader();
+      hideLoading();
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playersOnline]);
-
-  console.log(isOnline);
 
   return (
     <Container>
@@ -102,7 +99,6 @@ const Online = ({ playersOnline }) => {
           </div>
         </div>
       </div>
-      {loader}
     </Container>
   );
 };
@@ -111,4 +107,8 @@ const mapStateToProps = (state) => {
   return {};
 };
 
-export default connect(mapStateToProps, { playersOnline })(Online);
+export default connect(mapStateToProps, {
+  playersOnline,
+  showLoading,
+  hideLoading,
+})(Online);

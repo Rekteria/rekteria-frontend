@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { supportList } from '../../actions/PlayerActions';
 import { groupsId } from '../../config';
 import { convertTimestempToDate } from '../../helpers/DateTime';
+
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
+
 import Container from '../Layouts/Container';
 
 const Support = () => {
@@ -11,10 +14,12 @@ const Support = () => {
   const [listSupport, setListSupport] = React.useState([]);
 
   React.useEffect(() => {
+    dispatch(showLoading());
     dispatch(supportList())
       .then(({ payload }) => {
         const newData = payload.data.data;
         setListSupport(newData);
+        dispatch(hideLoading());
       })
       .catch((err) => {
         console.log(err);

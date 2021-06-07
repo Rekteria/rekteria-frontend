@@ -1,4 +1,7 @@
-import { GET_LAST_DEATHS, GET_TOP_KILLERS } from '../actions/OnlineActions';
+import {
+  GET_LAST_DEATHS,
+  GET_TOP_KILLERS,
+} from '../actions/PlayerDeathsActions';
 
 const initialState = {
   death: null,

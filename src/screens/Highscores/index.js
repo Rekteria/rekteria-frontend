@@ -71,8 +71,6 @@ const Highscores = ({ highscoresList, mobile, showLoading, hideLoading }) => {
     setFilterSkill(e);
   }
 
-  console.log(filterSkill);
-
   return (
     <>
       <div className="logo"></div>
@@ -185,7 +183,6 @@ const Highscores = ({ highscoresList, mobile, showLoading, hideLoading }) => {
                         : highscores[filterSkill];
                     return (
                       <tr key={highscores.id}>
-                        {console.log(highscores)}
                         <td>{pageInitial * characterPerPage + index + 1}</td>
                         <td>
                           <div style={{ fontWeight: 'bold' }}>

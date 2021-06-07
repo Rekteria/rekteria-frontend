@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getLastDeaths } from '../../actions/PlayerDeathsActions';
 import { convertTimestempToDate } from '../../helpers/DateTime';
+import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 import Container from '../Layouts/Container';
 
@@ -11,10 +12,12 @@ const LastDeaths = () => {
   const [deathPlayer, setDeathPlayer] = React.useState([]);
 
   React.useEffect(() => {
+    dispatch(showLoading());
     dispatch(getLastDeaths())
       .then(({ payload }) => {
         const newData = payload.data.data;
         setDeathPlayer(newData);
+        dispatch(hideLoading());
       })
       .catch((err) => {
         console.log(err);
@@ -40,7 +43,6 @@ const LastDeaths = () => {
                 {deathPlayer.map((death) => {
                   return (
                     <tr key={death.time}>
-                      {console.log(death)}
                       <td>
                         <Link to={`/character/${death?.player.name}`}>
                           {death?.player.name}
