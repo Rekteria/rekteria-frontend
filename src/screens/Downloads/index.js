@@ -10,7 +10,8 @@ import './styles.css';
 const Downloads = () => {
   return (
     <Container>
-      <div className="panel panel-default mt-2">
+      <div className="panel panel-default mx-auto">
+        <div className="panel-heading">Downloads</div>
         <div className="panel-body">
           <div className="row">
             <div className="col-lg-4">

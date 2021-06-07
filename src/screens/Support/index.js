@@ -23,41 +23,44 @@ const Support = () => {
 
   return (
     <Container>
-      <div className="card p-3 mt-2">
-        <h3>Support</h3>
-        <hr />
-        For any bigger issues or major bugs, you should contact our
-        Administrators.
-        <table className="table table-striped table-condensed">
-          <tbody>
-            <tr>
-              <th width="15%">Group</th>
-              <th width="70%">Name</th>
-              <th>Last seen</th>
-            </tr>
-            {listSupport.map((admins) => {
-              return (
-                <tr key={admins.id}>
-                  <td>
-                    <span className="label label-primary">
-                      {groupsId[admins.group_id]}
-                    </span>
-                  </td>
-                  <td>
-                    <Link to={`/character/${admins.name}`}>{admins.name}</Link>
-                  </td>
-                  <td>
-                    <span className="label label-default">
-                      <time className="timeago">
-                        {convertTimestempToDate(admins.lastlogin)}
-                      </time>
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="panel panel-default mx-auto">
+        <div className="panel-heading">Support List</div>
+        <div className="panel-body">
+          For any bigger issues or major bugs, you should contact our
+          Administrators.
+          <table className="table table-striped table-condensed">
+            <tbody>
+              <tr>
+                <th width="15%">Group</th>
+                <th width="70%">Name</th>
+                <th>Last seen</th>
+              </tr>
+              {listSupport.map((admins) => {
+                return (
+                  <tr key={admins.id}>
+                    <td>
+                      <span className="label label-primary">
+                        {groupsId[admins.group_id]}
+                      </span>
+                    </td>
+                    <td>
+                      <Link to={`/character/${admins.name}`}>
+                        {admins.name}
+                      </Link>
+                    </td>
+                    <td>
+                      <span className="label label-default">
+                        <time className="timeago">
+                          {convertTimestempToDate(admins.lastlogin)}
+                        </time>
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Container>
   );
