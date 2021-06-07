@@ -18,7 +18,16 @@ const CharacterList = ({ characterList }) => {
                 <b>{index + 1}. </b>
                 <Link to={`/character/${list.name}`}>{list.name}</Link>
               </td>
-              <td>Offline</td>
+              <td>
+                {' '}
+                <font
+                  color={list.players_onlines?.length > 0 ? 'green' : 'black'}
+                >
+                  <b>
+                    {list.players_onlines?.length > 0 ? 'Online' : 'Offline'}
+                  </b>
+                </font>
+              </td>
             </tr>
           );
         })}

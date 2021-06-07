@@ -1,35 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { convertTimestempToDate } from '../../helpers/DateTime';
-const CharacterVictims = ({ playerDeaths }) => {
+const CharacterVictims = ({ victimsList }) => {
   return (
     <>
       <table
         width="100%"
-        className="guild-list table-bordered"
+        className="guild-list table-bordered mb-5"
         cellPadding={10}
       >
         <tbody>
-          {playerDeaths.map((victims) => {
-            return victims.unjustified === 1 ? (
+          {victimsList.map((victims) => {
+            return (
               <tr key={victims.time}>
-                <td width="30%">30 May 2021, 00:44</td>
-                {console.log(victims)}
+                <td width="30%">{convertTimestempToDate(victims.time)}</td>
                 <td>
                   Killed{' '}
-                  <a
+                  <Link
+                    to={`/character/${victims.player.name}`}
                     className="notranslate"
-                    href="/character/show/Fake-tibia-coach"
                   >
                     <strong>{victims.player.name}</strong>
-                  </a>{' '}
+                  </Link>{' '}
                   at level {victims.level}.
                   <font className="m-1" color="green">
                     (Justified)
                   </font>
                 </td>
               </tr>
-            ) : null;
+            );
           })}
         </tbody>
       </table>

@@ -34,6 +34,7 @@ const Character = ({ playerGetCharacter }) => {
   const [playerDeaths, setPlayerDeaths] = React.useState([]);
   const [playerAchieve, setPlayerAchieve] = React.useState([]);
   const [characterList, setCharacterList] = React.useState([]);
+  const [victimsList, setVictimsList] = React.useState([]);
   // const [playerItems, setPlayerItems] = React.useState([]);
   // const [stateItems, setStateItems] = React.useState(arrItems);
 
@@ -51,9 +52,15 @@ const Character = ({ playerGetCharacter }) => {
         const dataDeaths = payload.data.data.rows[0].player_deaths;
         setPlayerDeaths(dataDeaths);
 
+        /* data character victims */
+        const dataVictims = payload.data.data.playerVictims;
+        setVictimsList(dataVictims);
+
+        /* data achievements */
         const dataAchievement = payload.data.data.achievements;
         setPlayerAchieve(dataAchievement);
 
+        /* data deathlist */
         const dataCharacterList = payload.data.data.characterList;
         setCharacterList(dataCharacterList);
 
@@ -104,18 +111,31 @@ const Character = ({ playerGetCharacter }) => {
               {/* Profile end */}
 
               {/* Achievements start */}
-              <h3>Achievements</h3>
-              <Achievement playerAchieve={playerAchieve} />
+              {playerAchieve?.length > 0 && (
+                <>
+                  <h3>Achievements</h3>
+                  <Achievement playerAchieve={playerAchieve} />
+                </>
+              )}
               {/* Achievements end */}
 
               {/* DeathList start */}
-              <h3>DeathList</h3>
-              <DeathList playerDeaths={playerDeaths} />
+              {playerDeaths?.length > 0 && (
+                <>
+                  <h3>DeathList</h3>
+                  <DeathList playerDeaths={playerDeaths} />
+                </>
+              )}
               {/* Deathlist end */}
 
               {/* DeathList start */}
-              <h3>Character Victims</h3>
-              {/* <CharacterVictims playerDeaths={playerDeaths} /> */}
+              {victimsList?.length > 0 && (
+                <>
+                  <h3>Character Victims</h3>
+                  <CharacterVictims victimsList={victimsList} />
+                </>
+              )}
+
               {/* Deathlist end */}
 
               {/* CharcterList */}
