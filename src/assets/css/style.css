@@ -18,7 +18,7 @@ a {
 .news-title {
   border-radius: 3px;
   box-shadow: 0 1px 3px #e25a5ae6 inset;
-  background: url(../img/xd.png) center bottom repeat-x,
+  background: url(../img/topbar_bg.png) center bottom repeat-x,
     linear-gradient(#8a2323, #560909);
   height: 33px;
   color: #fff;
@@ -100,7 +100,7 @@ a {
   color: #fff;
   /* margin: -15px -15px 0 -15px; */
   width: 100%;
-  background: url(../img/xd.png) center top repeat-x,
+  background: url(../img/topbar_bg.png) center top repeat-x,
     linear-gradient(#8a2323, #560909);
   box-shadow: 0 2px 10px #0005, 0 1px 1px #c15454 inset;
   height: 43px;
