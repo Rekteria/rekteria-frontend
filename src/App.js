@@ -33,6 +33,7 @@ import Support from './screens/Support';
 import LastDeaths from './screens/LastDeaths';
 import TopKillers from './screens/TopKillers';
 import CharacterBazar from './screens/CharacterBazar';
+import SellCharacter from './screens/CharacterBazar/SellCharacter';
 
 import LoadingBar from 'react-redux-loading-bar';
 
@@ -88,6 +89,11 @@ const App = ({ initAccount }) => {
             exact
             path="/account/characters/create"
             component={AccountCharactersCreate}
+          />
+          <ProtectedRoute
+            exact
+            path="/bazar/:name/sell"
+            component={SellCharacter}
           />
           {/* Finaly Protected Routes */}
 

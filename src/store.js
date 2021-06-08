@@ -11,6 +11,7 @@ import pagarmeReducer from './reducers/PagarmeReducer';
 import paymentHistoryReducer from './reducers/PaymentHistoryReducer';
 import pixGerenciaReducer from './reducers/PixGerenciaReducer';
 import playerDeathsReducer from './reducers/PlayerDeathsReducer';
+import characterBazarReducer from './reducers/CharacterBazarReducer';
 import { loadingBarMiddleware } from 'react-redux-loading-bar';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 
@@ -25,8 +26,9 @@ const reducers = combineReducers({
   pagarme: pagarmeReducer,
   paymentHistory: paymentHistoryReducer,
   pixGerencia: pixGerenciaReducer,
-  loadingBar: loadingBarReducer,
   playerDeaths: playerDeathsReducer,
+  characterBazar: characterBazarReducer,
+  loadingBar: loadingBarReducer,
 });
 
 const store = createStore(

@@ -40,8 +40,8 @@ export const playerCreate = (data) => {
 };
 
 export const playerList = (data) => {
-  const payload = apiGet('/player/characters');
-  return { type: PLAYER_CREATE, payload };
+  const payload = apiGet('/player/characters', data);
+  return { type: PLAYER_LIST, payload };
 };
 
 export const playerUpdate = (id, data) => {

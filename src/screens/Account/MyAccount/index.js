@@ -68,6 +68,8 @@ const MyAccount = ({
     setTimeout(() => history.push('/account/avatar'), 2000);
   }
 
+  console.log('player', player);
+
   return (
     <Container>
       <div id="contentBody">

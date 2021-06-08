@@ -19,7 +19,8 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case PLAYER_CREATE: {
+    case PLAYER_CREATE:
+    case PLAYER_LIST: {
       const response = payload ? payload.data : null;
       const player = response ? response.data : null;
       return { ...state, player };
@@ -38,11 +39,10 @@ export default function (state = initialState, action) {
       return { ...state, player };
     }
 
-    case PLAYER_LIST:
     case SUPPORT_LIST: {
       const response = payload ? payload.data : null;
-      const players = response ? response.players : null;
-      return { ...state, players };
+      const player = response ? response.player : null;
+      return { ...state, player };
     }
 
     case PLAYER_TO_REMOVE: {
