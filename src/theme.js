@@ -1,5 +1,5 @@
 import { red } from '@material-ui/core/colors';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 export const theme = {
   palette: {
@@ -28,4 +28,4 @@ export const theme = {
   },
 };
 
-export default createMuiTheme(theme)
+export default responsiveFontSizes(createMuiTheme(theme))
