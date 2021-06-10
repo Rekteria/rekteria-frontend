@@ -81,19 +81,6 @@ const Character = ({ playerGetCharacter }) => {
   // ];
   // const newMeleeSkill = Math.max(...meleeArray);
 
-  // React.useEffect(() => {
-  //   let oizin = {};
-  //   Object.entries(arrItems).forEach(([value, index]) => {
-  //     playerItems.forEach((item) => {
-  //       if (item.pid === index) {
-  //         oizin[value] = item.itemtype;
-  //       }
-  //     });
-  //   });
-
-  //   setStateItems(oizin);
-  // }, [playerItems]);
-
   return (
     <Container>
       <div className="text-center mb-3">

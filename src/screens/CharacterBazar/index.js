@@ -7,6 +7,7 @@ import {
   getSellCharacters,
   backPlayerToOldAccount,
   getAllBazarOffers,
+  buyCharacterOffer,
 } from '../../actions/CharacterBazarActions';
 
 import { characterVocations, genders } from '../../config';
@@ -14,23 +15,11 @@ import { formatDate } from '../../helpers/DateTime';
 
 import './styles.css';
 
-const arrItems = {
-  slotHead: 1,
-  slotNecklace: 2,
-  slotBackpack: 3,
-  slotArmor: 4,
-  slotRight: 5,
-  slotLeft: 6,
-  slotLegs: 7,
-  slotFeet: 8,
-  slotRing: 9,
-  slotAmmo: 10,
-};
-
 const CharacterBazar = () => {
   const dispatch = useDispatch();
 
   const { player } = useSelector((state) => state.player);
+  const { account } = useSelector((state) => state.account);
 
   const [getCharacterList, setGetCharacterList] = React.useState([]);
   const [getBazarOffers, setGetBazarOffers] = React.useState([]);
@@ -57,6 +46,10 @@ const CharacterBazar = () => {
 
   const cancelOfferHandler = (playersInAccount) => {
     dispatch(backPlayerToOldAccount(playersInAccount));
+  };
+
+  const buyOfferHandler = (offer) => {
+    dispatch(buyCharacterOffer(offer));
   };
 
   return (
@@ -100,7 +93,6 @@ const CharacterBazar = () => {
               {getBazarOffers.map((offer) => {
                 return (
                   <div className="card mt-3" key={offer.id}>
-                    {/* {console.log(offer)} */}
                     <div className="card-body">
                       <div className="Auction">
                         <div className="AuctionHeader">
@@ -203,15 +195,17 @@ const CharacterBazar = () => {
                           <div className="AuctionBodyBlock CurrentBid">
                             <div className="Container">
                               <div className="MyMaxBidLabel">
-                                Current Coins: 382
+                                Current Coins: {account?.coins}
                               </div>
-                              <form action="https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades">
-                                <div className="BigButton">
-                                  <button className="btn btn-outline-warning btn-sm mt-2">
-                                    Comprar
-                                  </button>
-                                </div>
-                              </form>
+
+                              <div className="BigButton">
+                                <button
+                                  className="btn btn-outline-warning btn-sm mt-2"
+                                  onClick={() => buyOfferHandler(offer)}
+                                >
+                                  Comprar
+                                </button>
+                              </div>
                             </div>
                           </div>
                         </div>
