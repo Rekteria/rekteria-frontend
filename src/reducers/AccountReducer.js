@@ -13,6 +13,7 @@ import {
   PROFILE_NAME,
   CHANGE_PASSWORD,
   GET_ACCOUNT,
+  GENERATE_RK,
 } from '../actions/AccountActions';
 import {
   getAccount,
@@ -47,14 +48,13 @@ export default function (state = initialState, action) {
     case POST_PROFILE_AVATAR:
     case DELETE_PROFILE_AVATAR:
     case GET_ACCOUNT:
+    case GENERATE_RK:
       const response = payload ? payload.data : null;
       const account = response ? response.data : null;
       const metadata = response ? response.metadata : null;
 
       const token = metadata ? metadata.token : null;
       const refreshToken = metadata ? metadata.refreshToken : null;
-
-      console.log('AccounReducer', account);
 
       if (account) setAccount(account);
       if (token) setToken(token);

@@ -21,6 +21,7 @@ export const DELETE_PROFILE_AVATAR = 'DELETE_PROFILE_AVATAR';
 export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const GET_ACCOUNT = 'GET_ACCOUNT';
+export const GENERATE_RK = 'GENERATE_RK';
 
 export const signUp = (data) => {
   const payload = apiPost('/account/sign-up', data);
@@ -88,4 +89,9 @@ export const resetPassword = (data) => {
 export const getAccount = (data) => {
   const payload = apiGet('/account/getAccount', data);
   return { type: GET_ACCOUNT, payload };
+};
+
+export const generateRk = (data) => {
+  const payload = apiPost('/account/generateRk', data);
+  return { type: GENERATE_RK, payload };
 };

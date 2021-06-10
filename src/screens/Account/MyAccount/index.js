@@ -30,10 +30,9 @@ const MyAccount = ({
   hideLoading,
 }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { player } = useSelector((state) => state.player);
   const [myAccount, setMyAccount] = React.useState([]);
-
-  const history = useHistory();
 
   React.useEffect(() => {
     showLoading();
@@ -68,33 +67,38 @@ const MyAccount = ({
     setTimeout(() => history.push('/account/avatar'), 2000);
   }
 
-  console.log('player', player);
-
   return (
     <Container>
       <div id="contentBody">
         <div className="panel panel-default">
           <div className="panel-heading ">Account Management</div>
 
-          <div className="panel panel-danger mt-3 m-3">
-            <div className="panel-heading ">Recovery Key</div>
-            <div className="panel-body">
-              <strong>
-                You do not have a recovery key. It is recommended that you
-                generate one.
+          {!myAccount.key && (
+            <div className="panel panel-danger mt-3 m-3">
+              <div className="panel-heading ">Recovery Key</div>
+              <div className="panel-body">
+                <strong>
+                  You do not have a recovery key. It is recommended that you
+                  generate one.
+                  <br />
+                  In case you lose your account, using the recovery key is the
+                  only option to recover it.
+                </strong>
                 <br />
-                In case you lose your account, using the recovery key is the
-                only option to recover it.
-              </strong>
-              <br />
-              <br />
-              <Link to="/account/key">
-                <button className="btn btn-success btn-sm">
-                  Generate Recovery Key
-                </button>
-              </Link>
+                <br />
+                <Link
+                  to={{
+                    pathname: '/account/generaterk',
+                    state: { key: myAccount.key },
+                  }}
+                >
+                  <button className="btn btn-success btn-sm">
+                    Generate Recovery Key
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="panel-body">
             <div className="panel-content">

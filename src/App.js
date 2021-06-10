@@ -10,6 +10,7 @@ import ProfileAvatar from './screens/Account/ProfileAvatar';
 import SignUp from './screens/SignUp';
 import Dashboard from './screens/Dashboard';
 import MyAccount from './screens/Account/MyAccount';
+import GenerateRk from './screens/Account/MyAccount/GenerateRk';
 import AccountCharactersCreate from './screens/Account/MyAccount/Create';
 import Highscores from './screens/Highscores';
 import Character from './screens/Character';
@@ -79,6 +80,11 @@ const App = ({ initAccount }) => {
             exact
             path="/account/avatar"
             component={ProfileAvatar}
+          />
+          <ProtectedRoute
+            exact
+            path="/account/generaterk"
+            component={GenerateRk}
           />
           <ProtectedRoute
             exact
