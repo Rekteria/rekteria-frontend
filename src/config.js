@@ -84,4 +84,17 @@ module.exports = {
     { type: 'skill_shielding', name: 'Shield Fighting' },
     { type: 'skill_fishing', name: 'Fishing' },
   ],
+
+  arrItems: {
+    slotHead: 1,
+    slotNecklace: 2,
+    slotBackpack: 3,
+    slotArmor: 4,
+    slotRight: 5,
+    slotLeft: 6,
+    slotLegs: 7,
+    slotFeet: 8,
+    slotRing: 9,
+    slotAmmo: 10,
+  },
 };

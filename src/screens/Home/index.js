@@ -111,7 +111,7 @@ const Home = ({ forumBoard, showLoading, hideLoading }) => {
                         {news.character_name}
                       </h5>
                       <small className="m-0 l-h-n">
-                        {groupsId[news?.account.players[0].group_id]}
+                        {groupsId[news?.account.players[0]?.group_id]}
                       </small>
                     </div>
                     <div className="col-3 text-right">

@@ -1,4 +1,9 @@
-import { SELL_CHARACTER } from '../actions/CharacterBazarActions';
+import {
+  SELL_CHARACTER,
+  GET_SELL_CHARACTER_LIST,
+  BACK_TO_OLD_ACCOUNT,
+  GET_ALL_OFFERS,
+} from '../actions/CharacterBazarActions';
 
 const initialState = {
   sellCharacter: [],
@@ -7,7 +12,10 @@ const initialState = {
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case SELL_CHARACTER: {
+    case SELL_CHARACTER:
+    case GET_SELL_CHARACTER_LIST:
+    case BACK_TO_OLD_ACCOUNT:
+    case GET_ALL_OFFERS: {
       const response = payload ? payload.data : null;
       const sellCharacter = response ? response.data : null;
       return { ...state, sellCharacter };
