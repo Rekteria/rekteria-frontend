@@ -21,8 +21,8 @@ const useStyles = makeStyles((theme) => {
     root: {
       backgroundColor: "transparent",
       background: [
-        `url(${TopbarBg}) center top repeat-x`,
-        "linear-gradient(#8a2323, #560909)",
+        [`url(${TopbarBg})`, "center top", "repeat-x"],
+        ["linear-gradient(#8a2323, #560909)"]
       ],
       boxShadow: "0 2px 10px #0005, 0 1px 1px #c15454 inset",
     },

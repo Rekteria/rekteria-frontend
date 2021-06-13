@@ -28,24 +28,14 @@ const useStyles = makeStyles((theme) => ({
   navbar: {
     borderRadius: 5,
     backgroundColor: "transparent",
-    backgroundImage: [
-      `url(${NavbarOrnament})`,
-      `url(${NavbarOrnament})`,
-      `url(${NavbarOrnament})`,
-      `url(${NavbarOrnament})`,
-      `url(${NavbarBackground})`,
-      "linear-gradient(#216669, #144144)",
-    ],
-    backgroundRepeat:
-      "no-repeat, no-repeat, no-repeat, no-repeat, repeat-x, repeat",
-    backgroundPosition: [
-      "left -36px top -36px",
-      "left -36px bottom -36px",
-      "right -36px top -36px",
-      "right -36px bottom -36px",
-      "left top",
-      "center center",
-    ],
+    background: [
+      [`url(${NavbarOrnament})`,"left -36px top -36px", "no-repeat"],
+      [`url(${NavbarOrnament})`,"left -36px bottom -36px", "no-repeat"],
+      [`url(${NavbarOrnament})`,"right -36px top -36px", "no-repeat"],
+      [`url(${NavbarOrnament})`,"right -36px bottom -36px", "no-repeat"],
+      [`url(${NavbarBackground})`,"left top", "repeat-x"],
+      ["linear-gradient(#216669, #144144)","center center", "repeat"]
+    ]
   },
   logo: {
     width: 65,
@@ -56,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerMenuButton: {
     color: 'white'
+  },
+  drawerPaper: {
+    backgroundColor: theme.palette.background.menu.color,
   },
   drawerRoot: {
     width: "70vw",
@@ -211,7 +204,8 @@ const Navbar = () => {
             anchor="right"
             open={drawerIsOpen}
             onClose={toggleDrawer(false)}
-          >
+            classes={{paper: classes.drawerPaper}}>
+
             <div className={classes.drawerRoot} role="presentation">
               <List component="nav" className={classes.drawerList}>
                 <DrawerButton setDrawerIsOpen={setDrawerIsOpen} {...buttons.home} />

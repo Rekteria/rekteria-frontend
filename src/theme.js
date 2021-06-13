@@ -14,7 +14,7 @@ export const theme = {
     },
     background: {
       default: '#2b2a2a',
-      paper: '#374e50f5',
+      // paper: '#374e50f5',
       menu: {
         color:'#374e50f5',
         hover: '#338b8e'
