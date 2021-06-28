@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -20,10 +19,11 @@ import ProfileAvatar from "../../../assets/img/Profile_Avatar.png";
 import NavBg from "../../../assets/img/navbar_bg.png";
 import BtnBg from "../../../assets/img/btn_bg.png";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+import Paper from "../Paper"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // borderRadius: 5
+    padding: 9
   },
   header: {
     color: "white",
@@ -113,9 +113,9 @@ const AccountWidget = ({ account }) => {
   const avatarImg = account?.avatar ? account.avatar : ProfileAvatar;
 
   return (
-    <Paper square className={classes.root}>
+    <Paper className={classes.root} onlySmallCorners>
       <div className={classes.header}>
-        <Typography variant="h5">Account</Typography>
+        <Typography variant="h4">Account</Typography>
       </div>
 
       {account ? (

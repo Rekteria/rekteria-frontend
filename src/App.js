@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { initAccount } from './actions/AccountActions';
 
-import Home from './screens/Home';
+import Home from './screens/Home2';
 import AccountProfile from './screens/Account/Profile';
 import ProfileName from './screens/Account/ProfileName';
 import ProfileAvatar from './screens/Account/ProfileAvatar';
@@ -41,9 +41,9 @@ import LoadingBar from 'react-redux-loading-bar';
 import PageSearch from './components/PageSearch';
 import ProtectedRoute from './helpers/ProtectedRoute';
 
-import 'react-toastify/dist/ReactToastify.min.css';
-import './assets/css/bootstrap.min.css';
-import './assets/css/style.css';
+// import 'react-toastify/dist/ReactToastify.min.css';
+// import './assets/css/bootstrap.min.css';
+// import './assets/css/style.css';
 
 import '../node_modules/bootstrap/js/src/modal';
 import '../node_modules/bootstrap/js/src/dropdown';

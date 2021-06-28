@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => {
       alignItems: "center",
       borderLeft: "1px solid #ffffff24",
       borderRight: "1px solid #00000024",
-      [theme.breakpoints.down("lg")]: {
+      [theme.breakpoints.down("xl")]: {
         padding: theme.spacing(0, 1.5),
       },
       [theme.breakpoints.down("sm")]: {
@@ -177,7 +177,13 @@ const Topbar = ({ currentStatus }) => {
               variant="contained"
               className={classes.downloadButton}
             >
-              Download Client <Hidden smDown>{clientVersions.windows}</Hidden>
+              <Hidden smDown>
+              {"Download "}
+              </Hidden>
+              <Hidden mdUp>
+              {"Get "}
+              </Hidden>
+              Client <Hidden smDown>{clientVersions.windows}</Hidden>
             </Button>
           </div>
         </Hidden>
